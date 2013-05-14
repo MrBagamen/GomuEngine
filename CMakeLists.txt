@@ -14,8 +14,14 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX OR "${CMAKE_CXX_COMPIL
 endif ()
 
 # Add sources and executable
-aux_source_directory(. SRC_LIST)
-add_executable(${PROJECT_NAME} ${SRC_LIST})
+
+add_executable(${PROJECT_NAME}
+DrawText.cpp
+DrawText.hpp
+main.cpp
+window.cpp
+window.hpp
+)
 
 # Link libraries
 TARGET_LINK_LIBRARIES(GomuEngine
