@@ -13,6 +13,13 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX OR "${CMAKE_CXX_COMPIL
     add_definitions("-std=c++11 -pedantic -Wall -Wextra")
 endif ()
 
+# Include the right directories where the headers are found
+include_directories(
+${SDL_INCLUDE_DIR}
+${GLEW_INCLUDE_DIR}
+${OPENGL_INCLUDE_DIR}
+)
+
 # Add sources and executable
 
 add_executable(${PROJECT_NAME}
