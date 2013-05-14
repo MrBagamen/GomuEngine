@@ -7,11 +7,6 @@ Window::Window()
         printf("Error: %s\n", SDL_GetError());
         exit(1);
     }
-    GLenum err = glewInit();
-    if (GLEW_OK != err)
-    {
-        printf("Error: %s\n", glewGetErrorString(err));
-    }
 }
 
 void Window::Create(int _w, int _h, const char* _title)
@@ -34,6 +29,13 @@ void Window::Create(int _w, int _h, const char* _title)
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 
     glEnableClientState(GL_VERTEX_ARRAY);
+
+    GLenum err = glewInit();
+    if (GLEW_OK != err)
+    {
+        printf("Error: %s\n", glewGetErrorString(err));
+        exit(1);
+    }
 }
 
 bool Window::isRunning()

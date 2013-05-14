@@ -2,6 +2,8 @@
 #define WINDOW_HPP
 
 #include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_ttf.h>
 #include <GL/glew.h>
 #include <GL/gl.h>
 
