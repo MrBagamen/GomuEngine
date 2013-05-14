@@ -52,6 +52,8 @@ bool Window::isRunning()
     }
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
+
+    return true;
 }
 
 void Window::Update()
