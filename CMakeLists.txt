@@ -8,8 +8,13 @@ find_package(SDL_ttf REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
+# Add additional flags to GCC based compilers
+if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+    add_definitions("-std=c++11 -pedantic -Wall -Wextra")
+endif ()
+
+# Add sources and executable
 aux_source_directory(. SRC_LIST)
-add_definitions(-std=c++11 -pedantic -Wall -Wextra)
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
 # Link libraries
