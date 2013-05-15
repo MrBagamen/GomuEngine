@@ -26,9 +26,9 @@ ${OPENGL_INCLUDE_DIR}
 # Add library
 add_library(GomuEngine
 src/gomu.cpp
-src/DrawText.cpp
+src/Text.cpp
 include/gomu/gomu.hpp
-include/gomu/DrawText.hpp
+include/gomu/Text.hpp
 )
 
 target_link_libraries(GomuEngine
@@ -45,4 +45,4 @@ function(addTest name)
     target_link_libraries(${name} GomuEngine)
 endfunction()
 
-addTest(DrawText)
+addTest(Text)
