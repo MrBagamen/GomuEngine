@@ -1,6 +1,9 @@
-#include <gomu/DrawText.hpp>
+#include <gomu/Text.hpp>
 
-DrawText::DrawText() :
+namespace gomu
+{
+
+Text::Text() :
     x(0),y(0),
     texture(0),
     img(nullptr),
@@ -13,7 +16,7 @@ DrawText::DrawText() :
 {
 }
 
-void DrawText::update()
+void Text::update()
 {
     if (string.empty() || !font)
     {
@@ -28,7 +31,7 @@ void DrawText::update()
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
 }
 
-void DrawText::loadFont(const char* file, int ptsize)
+void Text::loadFont(const char* file, int ptsize)
 {
 	TTF_Font* temp;
 	temp = TTF_OpenFont(file, ptsize);
@@ -41,7 +44,7 @@ void DrawText::loadFont(const char* file, int ptsize)
     update();
 }
 
-void DrawText::textColor(Uint8 _r, Uint8 _g, Uint8 _b)
+void Text::textColor(Uint8 _r, Uint8 _g, Uint8 _b)
 {
     text_color[0] = text_color[3] = text_color[6] = text_color[9] = _r / 255.0f;
     text_color[1] = text_color[4] = text_color[7] = text_color[10] = _g / 255.0f;
@@ -50,13 +53,13 @@ void DrawText::textColor(Uint8 _r, Uint8 _g, Uint8 _b)
     update();
 }
 
-void DrawText::setString(const std::string& string)
+void Text::setString(const std::string& string)
 {
     this->string = string;
     update();
 }
 
-void DrawText::draw()
+void Text::draw()
 {
     if (!img)
     {
@@ -78,8 +81,10 @@ void DrawText::draw()
     glPopMatrix();
 }
 
-void DrawText::setPosition(int _x, int _y)
+void Text::setPosition(int _x, int _y)
 {
 	x = _x;
 	y = _y;
+}
+
 }

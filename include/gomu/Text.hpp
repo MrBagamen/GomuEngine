@@ -7,10 +7,13 @@
 
 #include <string>
 
-class DrawText
+namespace gomu
+{
+
+class Text
 {
 public:
-	DrawText();
+    Text();
 	void loadFont(const char* file, int ptsize);
 	void textColor(Uint8 _r, Uint8 _g, Uint8 _b);
     void setString(const std::string &string);
@@ -31,5 +34,7 @@ private:
 	TTF_Font* font;
     std::string string;
 };
+
+}
 
 #endif
