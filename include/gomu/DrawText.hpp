@@ -21,9 +21,13 @@ private:
     void update();
 	int x, y;
 
+    GLfloat quad[8];
+    GLfloat texcoord[8];
+
 	GLuint texture;
 	SDL_Surface* img;
-	SDL_Color text_color;
+    GLfloat text_color[12];
+    SDL_Color default_color;
 	TTF_Font* font;
     std::string string;
 };

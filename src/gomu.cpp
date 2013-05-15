@@ -40,6 +40,8 @@ bool init(int width, int height, const std::string &title)
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 
     glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 
     GLenum err = glewInit();
 

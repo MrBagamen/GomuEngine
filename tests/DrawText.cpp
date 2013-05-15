@@ -39,6 +39,8 @@ int main()
         }
 
         glClear(GL_COLOR_BUFFER_BIT);
+        glLoadIdentity();
+
         text1.draw();
         text2.draw();
         text3.draw();
