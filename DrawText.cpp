@@ -1,12 +1,15 @@
 #include "DrawText.hpp"
 
-DrawText::DrawText()
+DrawText::DrawText() :
+    x(0),y(0),
+    texture(0),
+    img(nullptr),
+    text_color({0,0,0,0}),
+    font(nullptr)
 {
-	text_color = {0, 0, 0};
-	x = y = 0;
 }
 
-void DrawText::Init()
+void DrawText::init()
 {
 	if(TTF_Init() != 0)
 	{
@@ -17,7 +20,22 @@ void DrawText::Init()
 
 	glEnable(GL_TEXTURE_2D);
 	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+}
+
+void DrawText::update()
+{
+    if (string.empty() || !font)
+    {
+        return;
+    }
+
+    img = TTF_RenderText_Blended(font, string.c_str(), text_color);
+    glDeleteTextures(1, &texture);
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
 }
 
 void DrawText::loadFont(const char* file, int ptsize)
@@ -30,26 +48,28 @@ void DrawText::loadFont(const char* file, int ptsize)
 	}
 	printf("Loaded %s\n", file);
 	font = temp;
+    update();
 }
 
 void DrawText::textColor(Uint8 _r, Uint8 _g, Uint8 _b)
 {
-	text_color = {_r, _g, _b};
+    text_color = {_r, _g, _b, 0};
+    update();
 }
 
-void DrawText::setText(const char* text)
+void DrawText::setString(const std::string& string)
 {
-	img = TTF_RenderText_Blended(font, text, text_color);
-
-	glDeleteTextures(1, &texture);
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
+    this->string = string;
+    update();
 }
 
-void DrawText::Draw()
+void DrawText::draw()
 {
+    if (!img)
+    {
+        return;
+    }
+
 	glPushMatrix();
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glBegin(GL_QUADS);
