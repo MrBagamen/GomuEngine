@@ -4,7 +4,7 @@
 int main()
 {
     Window w;
-    w.Create(1024, 768, "GomuEngine");
+    w.create(1024, 768, "GomuEngine");
     DrawText::init();
 
     //Test Drawin Text
@@ -32,7 +32,7 @@ int main()
         text2.draw();
         text3.draw();
 
-        w.Update();
+        w.update();
     }
 
     return 0;

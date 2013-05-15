@@ -12,9 +12,9 @@ class Window
 public:
     Window();
 
-    void Create(int _w, int _h, const char* _title);
+    void create(int _w, int _h, const char* _title);
     bool isRunning();
-    void Update();
+    void update();
 private:
     unsigned int WIDTH, HEIGHT;
     SDL_Event event;

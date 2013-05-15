@@ -9,7 +9,7 @@ Window::Window()
     }
 }
 
-void Window::Create(int _w, int _h, const char* _title)
+void Window::create(int _w, int _h, const char* _title)
 {
     SDL_SetVideoMode(_w, _h, 32, SDL_HWSURFACE | SDL_OPENGL);
     SDL_WM_SetCaption(_title, nullptr);
@@ -56,7 +56,7 @@ bool Window::isRunning()
     return true;
 }
 
-void Window::Update()
+void Window::update()
 {
     SDL_GL_SwapBuffers();
 }
