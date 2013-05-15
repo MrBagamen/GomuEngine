@@ -19,7 +19,6 @@ public:
     void setString(const std::string &string);
 	void setPosition(int _x, int _y);
     void draw();
-
 private:
     void update();
 	int x, y;

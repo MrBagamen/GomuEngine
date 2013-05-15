@@ -49,7 +49,6 @@ void Text::textColor(Uint8 _r, Uint8 _g, Uint8 _b)
     text_color[0] = text_color[3] = text_color[6] = text_color[9] = _r / 255.0f;
     text_color[1] = text_color[4] = text_color[7] = text_color[10] = _g / 255.0f;
     text_color[2] = text_color[5] = text_color[8] = text_color[11] = _b / 255.0f;
-
     update();
 }
 
