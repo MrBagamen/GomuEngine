@@ -26,8 +26,8 @@ add_executable(${PROJECT_NAME}
 DrawText.cpp
 DrawText.hpp
 main.cpp
-Window.cpp
-Window.hpp
+gomu.cpp
+gomu.hpp
 )
 
 # Link libraries

@@ -9,20 +9,6 @@ DrawText::DrawText() :
 {
 }
 
-void DrawText::init()
-{
-	if(TTF_Init() != 0)
-	{
-		printf("Error: %s\n", TTF_GetError());
-		exit(1);
-	}
-	printf("Initialized SDL_ttf\n");
-
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-}
-
 void DrawText::update()
 {
     if (string.empty() || !font)

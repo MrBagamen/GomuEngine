@@ -1,11 +1,9 @@
-#include "Window.hpp"
+#include "gomu.hpp"
 #include "DrawText.hpp"
 
 int main()
 {
-    Window w;
-    w.create(1024, 768, "GomuEngine");
-    DrawText::init();
+    gomu::init(1024, 768, "GomuEngine");
 
     //Test Drawin Text
     DrawText text1;
@@ -26,13 +24,25 @@ int main()
     text3.setString("This is third font!");
     text3.setPosition(32, 256);
 
-    while(w.isRunning())
+    bool running = true;
+
+    while(running)
     {
+        SDL_Event e;
+
+        while (SDL_PollEvent(&e))
+        {
+            if (e.type == SDL_QUIT)
+            {
+                running = false;
+            }
+        }
+
+        glClear(GL_COLOR_BUFFER_BIT);
         text1.draw();
         text2.draw();
         text3.draw();
-
-        w.update();
+        SDL_GL_SwapBuffers();
     }
 
     return 0;

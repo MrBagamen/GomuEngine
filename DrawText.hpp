@@ -17,7 +17,6 @@ public:
 	void setPosition(int _x, int _y);
     void draw();
 
-    static void init();
 private:
     void update();
 	int x, y;
