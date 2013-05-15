@@ -5,13 +5,19 @@ namespace gomu
 
 Text::Text() :
     x(0),y(0),
+    texcoord{
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f
+    },
     texture(0),
     img(nullptr),
-    text_color({0,0,0}),
-    texcoord({0.0f, 0.0f,
-             1.0f, 0.0f,
-             1.0f, 1.0f,
-             0.0f, 1.0f}),
+    text_color {
+        1.0f, 1.0f, 1.0f, 1.0f,
+        1.0f, 1.0f, 1.0f, 1.0f,
+        1.0f, 1.0f, 1.0f, 1.0f
+    },
     font(nullptr)
 {
 }
