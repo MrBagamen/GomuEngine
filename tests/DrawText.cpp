@@ -1,5 +1,5 @@
-#include "gomu.hpp"
-#include "DrawText.hpp"
+#include <gomu/gomu.hpp>
+#include <gomu/DrawText.hpp>
 
 int main()
 {

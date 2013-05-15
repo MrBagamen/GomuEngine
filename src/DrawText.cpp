@@ -1,4 +1,4 @@
-#include "DrawText.hpp"
+#include <gomu/DrawText.hpp>
 
 DrawText::DrawText() :
     x(0),y(0),

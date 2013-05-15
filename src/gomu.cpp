@@ -1,4 +1,4 @@
-#include "gomu.hpp"
+#include <gomu/gomu.hpp>
 
 #include <SDL.h>
 #include <SDL_ttf.h>
