@@ -26,8 +26,8 @@ add_executable(${PROJECT_NAME}
 DrawText.cpp
 DrawText.hpp
 main.cpp
-window.cpp
-window.hpp
+Window.cpp
+Window.hpp
 )
 
 # Link libraries
