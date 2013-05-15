@@ -35,6 +35,10 @@ void Text::update()
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
+    quad[0] = 0.0f;  quad[1] = 0.0f;
+    quad[2] = img->w;quad[3] = 0.0f;
+    quad[4] = img->w;quad[5] = img->h;
+    quad[6] = 0.0f;  quad[7] = img->h;
 }
 
 void Text::loadFont(const char* file, int ptsize)
@@ -66,16 +70,6 @@ void Text::setString(const std::string& string)
 
 void Text::draw()
 {
-    if (!img)
-    {
-        return;
-    }
-
-    quad[0] = 0.0f;  quad[1] = 0.0f;
-    quad[2] = img->w;quad[3] = 0.0f;
-    quad[4] = img->w;quad[5] = img->h;
-    quad[6] = 0.0f;  quad[7] = img->h;
-
     glPushMatrix();
     glBindTexture(GL_TEXTURE_2D, texture);
     glTranslatef(x, y, 0.0f);
