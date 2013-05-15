@@ -23,12 +23,16 @@ ${GLEW_INCLUDE_DIR}
 ${OPENGL_INCLUDE_DIR}
 )
 
+set(HEADERS
+include/gomu/gomu.hpp
+include/gomu/Text.hpp
+)
+
 # Add library
 add_library(GomuEngine
 src/gomu.cpp
 src/Text.cpp
-include/gomu/gomu.hpp
-include/gomu/Text.hpp
+${HEADERS}
 )
 
 target_link_libraries(GomuEngine
@@ -46,3 +50,10 @@ function(addTest name)
 endfunction()
 
 addTest(Text)
+
+# Installation
+install(FILES ${HEADERS} DESTINATION include/gomu)
+install(TARGETS GomuEngine
+LIBRARY DESTINATION lib
+ARCHIVE DESTINATION lib
+)
