@@ -15,10 +15,11 @@ public:
     void LoadImage(const char* filePath);
     void Draw();
     void SetPosition(int _x, int _y);
+    void Rotate(int angle);
 
     Sprite();
 private:
-    int x = 0, y = 0;
+    int x = 0, y = 0, w, h, angle;
     GLfloat quad[8];
     GLfloat texcoord[8];
     GLfloat sprite_color[12];

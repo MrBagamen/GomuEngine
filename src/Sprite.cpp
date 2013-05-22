@@ -31,18 +31,20 @@ void Sprite::LoadImage(const char *filePath)
         exit(1);
     }
     printf("Loaded %s\n", filePath);
+    w = img->w;
+    h = img->h;
 
     //Build Texture
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    quad[0] = 0.0f;  quad[1] = 0.0f;
-    quad[2] = img->w;quad[3] = 0.0f;
-    quad[4] = img->w;quad[5] = img->h;
-    quad[6] = 0.0f;  quad[7] = img->h;
+    quad[0] =-w/2;  quad[1] =-w/2;
+    quad[2] = w/2;  quad[3] =-w/2;
+    quad[4] = w/2;  quad[5] = w/2;
+    quad[6] =-w/2;  quad[7] = w/2;
 
     SDL_FreeSurface(img);
 }
@@ -51,12 +53,18 @@ void Sprite::Draw()
 {
     glPushMatrix();
     glBindTexture(GL_TEXTURE_2D, texture);
-    glTranslatef(x, y, 0.0f);
+    glTranslatef(x+w/2, y+h/2, 0.0f);
+    glRotatef(angle, 0.0f, 0.0f, 1.0f);
     glVertexPointer(2, GL_FLOAT, 0, quad);
     glColorPointer(3, GL_FLOAT, 0, sprite_color);
     glTexCoordPointer(2, GL_FLOAT, 0, texcoord);
     glDrawArrays(GL_QUADS, 0, 8);
     glPopMatrix();
+}
+
+void Sprite::Rotate(int _angle)
+{
+    angle = _angle;
 }
 
 void Sprite::Color(Uint8 _r, Uint8 _g, Uint8 _b)

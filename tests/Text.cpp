@@ -30,6 +30,7 @@ int main()
     sprite1.LoadImage("res/test.png");
     sprite1.SetPosition(32, 350);
     //sprite1.Color(255, 255, 0);
+    sprite1.Rotate(45);
 
     bool running = true;
 
