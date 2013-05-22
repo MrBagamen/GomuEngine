@@ -1,4 +1,4 @@
-#include <gomu/gomu.hpp>
+#include <gomu/Application.hpp>
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -8,35 +8,33 @@
 namespace gomu
 {
 
-int windowWidth, windowHeight;
-
-bool init(int width, int height, const std::string &title)
+Application::Application(int width, int height, const std::string &title) :
+    m_width(width),
+    m_height(height),
+    m_title(title)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING))
     {
         printf("Error initializing SDL: %s\n", SDL_GetError());
-        return false;
+        throw;
     }
     if (!IMG_Init(IMG_INIT_PNG))
     {
         printf("Error initializing SDL_image: %s\n", IMG_GetError());
-        return false;
+        throw;
     }
 
-    windowWidth = width;
-    windowHeight = height;
-
-    if (!SDL_SetVideoMode(windowWidth, windowHeight, 32, SDL_HWSURFACE | SDL_OPENGL))
+    if (!SDL_SetVideoMode(m_width, m_height, 32, SDL_HWSURFACE | SDL_OPENGL))
     {
         printf("Error setting video mode: %s\n", SDL_GetError());
-        return false;
+        throw;
     }
 
-    SDL_WM_SetCaption(title.c_str(), nullptr);
+    SDL_WM_SetCaption(m_title.c_str(), nullptr);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0, windowWidth, windowHeight, 0, 0, 1);
+    glOrtho(0, m_width, m_height, 0, 0, 1);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
@@ -54,30 +52,51 @@ bool init(int width, int height, const std::string &title)
     if (err != GLEW_OK)
     {
         printf("Error: %s\n", glewGetErrorString(err));
-        return false;
+        throw;
     }
 
     if(TTF_Init())
     {
         printf("Error initializing SDL_ttf: %s\n", TTF_GetError());
-        return false;
+        throw;
     }
 
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-    return true;
 }
 
-int getWindowWidth()
+void Application::addState(State *state, const std::string &name)
 {
-    return windowWidth;
+    m_states[name] = state;
 }
 
-int getWindowHeight()
+void Application::setState(const std::string &name)
 {
-    return windowHeight;
+    m_state = m_states[name];
 }
+
+int Application::exec()
+{
+    for (;;)
+    {
+        SDL_Event event;
+
+        while (SDL_PollEvent(&event))
+        {
+            if (event.type == SDL_QUIT)
+            {
+                return 0;
+            }
+        }
+
+        m_state->onUpdate(1);
+        glClear(GL_COLOR_BUFFER_BIT);
+        m_state->onDraw();
+        SDL_GL_SwapBuffers();
+    }
+}
+
+
 
 }
