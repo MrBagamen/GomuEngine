@@ -24,16 +24,17 @@ ${OPENGL_INCLUDE_DIR}
 )
 
 set(HEADERS
-include/gomu/gomu.hpp
 include/gomu/Text.hpp
 include/gomu/Sprite.hpp
+include/gomu/State.hpp
+include/gomu/Application.hpp
 )
 
 # Add library
 add_library(GomuEngine
-src/gomu.cpp
 src/Text.cpp
 src/Sprite.cpp
+src/Application.cpp
 ${HEADERS}
 )
 
