@@ -48,6 +48,7 @@ void Text::loadFont(const char* file, int ptsize)
 	if(temp == nullptr)
 	{
 		printf("Error %s\n", TTF_GetError());
+        exit(1);
 	}
 	printf("Loaded %s\n", file);
 	font = temp;

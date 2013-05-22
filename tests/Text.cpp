@@ -1,5 +1,6 @@
 #include <gomu/gomu.hpp>
 #include <gomu/Text.hpp>
+#include <gomu/Sprite.hpp>
 
 int main()
 {
@@ -24,6 +25,12 @@ int main()
     text3.setString("This is third font!");
     text3.setPosition(32, 256);
 
+    //Test Sprite
+    gomu::Sprite sprite1;
+    sprite1.LoadImage("res/test.png");
+    sprite1.SetPosition(32, 350);
+    //sprite1.Color(255, 255, 0);
+
     bool running = true;
 
     while(running)
@@ -37,13 +44,15 @@ int main()
                 running = false;
             }
         }
-
         glClear(GL_COLOR_BUFFER_BIT);
         glLoadIdentity();
 
         text1.draw();
         text2.draw();
         text3.draw();
+
+        sprite1.Draw();
+
         SDL_GL_SwapBuffers();
     }
 

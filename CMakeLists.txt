@@ -26,12 +26,14 @@ ${OPENGL_INCLUDE_DIR}
 set(HEADERS
 include/gomu/gomu.hpp
 include/gomu/Text.hpp
+include/gomu/Sprite.hpp
 )
 
 # Add library
 add_library(GomuEngine
 src/gomu.cpp
 src/Text.cpp
+src/Sprite.cpp
 ${HEADERS}
 )
 

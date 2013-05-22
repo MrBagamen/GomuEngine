@@ -1,6 +1,7 @@
 #include <gomu/gomu.hpp>
 
 #include <SDL.h>
+#include <SDL_image.h>
 #include <SDL_ttf.h>
 #include <GL/glew.h>
 
@@ -14,6 +15,11 @@ bool init(int width, int height, const std::string &title)
     if (SDL_Init(SDL_INIT_EVERYTHING))
     {
         printf("Error initializing SDL: %s\n", SDL_GetError());
+        return false;
+    }
+    if (!IMG_Init(IMG_INIT_PNG))
+    {
+        printf("Error initializing SDL_image: %s\n", IMG_GetError());
         return false;
     }
 
