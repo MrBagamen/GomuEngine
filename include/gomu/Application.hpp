@@ -13,7 +13,7 @@ namespace gomu
 class Application
 {
 public:
-    Application(int width, int height, const std::string& title = std::string());
+    Application(int width, int height, bool fullscreen, const std::string& title = std::string());
     ~Application();
     void addState(State* state, const std::string& name);
     void setState(const std::string& name);
@@ -25,8 +25,12 @@ private:
     std::map<std::string, State*> m_states;
     State* m_state;
     Uint8* m_keyState;
+    bool m_fullscreen;
     friend bool isKeyDown(SDLKey);
+    friend bool toggleFullscreen();
 };
+
+bool toggleFullscreen();
 
 }
 

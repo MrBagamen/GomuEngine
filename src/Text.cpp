@@ -18,18 +18,18 @@ Text::Text() :
         1.0f, 1.0f, 1.0f, 1.0f,
         1.0f, 1.0f, 1.0f, 1.0f
     },
-    font(nullptr)
+    m_font(nullptr)
 {
 }
 
 void Text::update()
 {
-    if (string.empty() || !font)
+    if (string.empty() || !m_font)
     {
         return;
     }
     default_color = {255, 255, 255, 0};
-    img = TTF_RenderText_Blended(font, string.c_str(), default_color);
+    img = TTF_RenderText_Blended(m_font->handle, string.c_str(), default_color);
     glDeleteTextures(1, &texture);
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -41,17 +41,9 @@ void Text::update()
     quad[6] = 0.0f;  quad[7] = img->h;
 }
 
-void Text::loadFont(const char* file, int ptsize)
+void Text::setFont(const Font &font)
 {
-	TTF_Font* temp;
-	temp = TTF_OpenFont(file, ptsize);
-	if(temp == nullptr)
-	{
-		printf("Error %s\n", TTF_GetError());
-        exit(1);
-	}
-	font = temp;
-    update();
+    m_font = &font;
 }
 
 void Text::textColor(Uint8 _r, Uint8 _g, Uint8 _b)
