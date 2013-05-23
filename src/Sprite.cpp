@@ -38,7 +38,10 @@ void Sprite::loadImage(const char *filePath)
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
+    // TODO: We assume that the pixel data is always in RGBA format.
+    // It might not always be the case.
+    // We could examine the SDL_Surface for the format of the pixel data.
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
     glBindTexture(GL_TEXTURE_2D, 0);
 
     quad[0] =-w/2;  quad[1] =-w/2;
