@@ -14,6 +14,7 @@ class Application
 {
 public:
     Application(int width, int height, const std::string& title = std::string());
+    ~Application();
     void addState(State* state, const std::string& name);
     void setState(const std::string& name);
     int exec();

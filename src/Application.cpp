@@ -72,6 +72,13 @@ Application::Application(int width, int height, const std::string &title) :
     _application = this;
 }
 
+Application::~Application()
+{
+    TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
+}
+
 void Application::addState(State *state, const std::string &name)
 {
     m_states[name] = state;
