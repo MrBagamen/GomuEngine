@@ -13,6 +13,7 @@ protected:
     virtual void onDraw() {}
     virtual void onKeyPress(SDLKey key) {(void)(key);}
     friend class Application;
+    virtual ~State(){}
 };
 
 }
