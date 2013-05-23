@@ -11,7 +11,7 @@ class State
 protected:
     virtual void onUpdate(double dt) {}
     virtual void onDraw() {}
-    virtual void onKeyPress(SDLKey key) {};
+    virtual void onKeyPress(SDLKey key) {}
     friend class Application;
 };
 
