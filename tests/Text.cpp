@@ -47,6 +47,7 @@ public:
 
     void onDraw()
     {
+        glClear(GL_COLOR_BUFFER_BIT);
         text1.draw();
         text2.draw();
         text3.draw();
