@@ -25,8 +25,13 @@ public:
     Sticks()
     {
         glClearColor(0.2f, 0.7f, 0.2f, 1.0f);
-        ball.sprite.loadImage("res/ball.png");
-        stick.sprite.loadImage("res/stick.png");
+        ballTexture.loadFromFile("res/ball.png");
+        stickTexture.loadFromFile("res/stick.png");
+        ball.sprite.setTexture(ballTexture);
+        stick.sprite.setTexture(stickTexture);
+        stick2.sprite.setTexture(stickTexture);
+        stick2.x = 100;
+        stick2.y = 100;
         font.openFromFile("res/fast99.ttf", 16);
         scoreText.setFont(font);
         scoreText.setString("Score: 0");
@@ -69,6 +74,9 @@ public:
             ball.y += 4;
         }
 
+        stick2.x = rand() % (640 - 32);
+        stick2.y = rand() % (480 - 32);
+
         if (collision(ball, stick))
         {
             stick.x = rand() % (640 - 32);
@@ -83,12 +91,15 @@ public:
         glClear(GL_COLOR_BUFFER_BIT);
         ball.draw();
         stick.draw();
+        stick2.sprite.color(rand(), rand(), rand());
+        stick2.draw();
         scoreText.draw();
         fsText.draw();
     }
 
-    Entity ball, stick;
+    Entity ball, stick, stick2;
     int score = 0;
+    gomu::Texture ballTexture, stickTexture;
     gomu::Font font;
     gomu::Text scoreText, fsText;
 };

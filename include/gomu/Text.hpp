@@ -4,7 +4,7 @@
 #include <gomu/Font.hpp>
 
 #include <SDL.h>
-#include <GL/gl.h>
+#include <GL/glew.h>
 
 #include <string>
 
