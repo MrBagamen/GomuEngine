@@ -29,6 +29,7 @@ include/gomu/Sprite.hpp
 include/gomu/State.hpp
 include/gomu/Application.hpp
 include/gomu/input.hpp
+include/gomu/Font.hpp
 )
 
 # Add library
@@ -37,6 +38,7 @@ src/Text.cpp
 src/Sprite.cpp
 src/Application.cpp
 src/input.cpp
+src/Font.cpp
 ${HEADERS}
 )
 

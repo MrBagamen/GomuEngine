@@ -27,9 +27,10 @@ public:
         glClearColor(0.2f, 0.7f, 0.2f, 1.0f);
         ball.sprite.loadImage("res/ball.png");
         stick.sprite.loadImage("res/stick.png");
-        scoreText.loadFont("res/fast99.ttf", 16);
+        font.openFromFile("res/fast99.ttf", 16);
+        scoreText.setFont(font);
         scoreText.setString("Score: 0");
-        fsText.loadFont("res/fast99.ttf", 16);
+        fsText.setFont(font);
         fsText.setString("Fullscreen: off - Alt-enter to toggle");
         fsText.setPosition(0, 16);
     }
@@ -88,6 +89,7 @@ public:
 
     Entity ball, stick;
     int score = 0;
+    gomu::Font font;
     gomu::Text scoreText, fsText;
 };
 

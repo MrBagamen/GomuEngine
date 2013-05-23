@@ -1,7 +1,8 @@
 #ifndef GOMU_DRAWTEXT_HPP
 #define GOMU_DRAWTEXT_HPP
 
-#include <SDL_ttf.h>
+#include <gomu/Font.hpp>
+
 #include <SDL.h>
 #include <GL/gl.h>
 
@@ -14,7 +15,7 @@ class Text
 {
 public:
     Text();
-	void loadFont(const char* file, int ptsize);
+    void setFont(const Font& font);
 	void textColor(Uint8 _r, Uint8 _g, Uint8 _b);
     void setString(const std::string &string);
 	void setPosition(int _x, int _y);
@@ -30,7 +31,7 @@ private:
 	SDL_Surface* img;
     GLfloat text_color[12];
     SDL_Color default_color;
-	TTF_Font* font;
+    const Font* m_font;
     std::string string;
 };
 
