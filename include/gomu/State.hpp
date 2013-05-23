@@ -1,5 +1,5 @@
-#ifndef STATE_HPP
-#define STATE_HPP
+#ifndef GOMU_STATE_HPP
+#define GOMU_STATE_HPP
 
 namespace gomu
 {
@@ -14,4 +14,4 @@ protected:
 
 }
 
-#endif // STATE_HPP
+#endif // GOMU_STATE_HPP

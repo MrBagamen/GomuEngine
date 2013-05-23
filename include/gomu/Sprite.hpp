@@ -1,5 +1,5 @@
-#ifndef SPRITE_HPP
-#define SPRITE_HPP
+#ifndef GOMU_SPRITE_HPP
+#define GOMU_SPRITE_HPP
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -11,11 +11,11 @@ namespace gomu
 class Sprite
 {
 public:
-    void Color(Uint8 _r, Uint8 _g, Uint8 _b);
-    void LoadImage(const char* filePath);
-    void Draw();
-    void SetPosition(int _x, int _y);
-    void Rotate(int angle);
+    void color(Uint8 _r, Uint8 _g, Uint8 _b);
+    void loadImage(const char* filePath);
+    void draw();
+    void setPosition(int _x, int _y);
+    void rotate(int angle);
 
     Sprite();
 private:
@@ -28,4 +28,5 @@ private:
 };
 
 }
-#endif // SPRITE_HPP
+
+#endif // GOMU_SPRITE_HPP

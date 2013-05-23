@@ -22,7 +22,7 @@ Sprite::Sprite() :
     y = 0;
 }
 
-void Sprite::LoadImage(const char *filePath)
+void Sprite::loadImage(const char *filePath)
 {
     SDL_Surface *img = IMG_Load(filePath);
     if(!img)
@@ -30,7 +30,7 @@ void Sprite::LoadImage(const char *filePath)
         printf("Error: %s\n", IMG_GetError());
         exit(1);
     }
-    printf("Loaded %s\n", filePath);
+
     w = img->w;
     h = img->h;
 
@@ -38,7 +38,10 @@ void Sprite::LoadImage(const char *filePath)
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_BGRA, GL_UNSIGNED_BYTE, img->pixels);
+    // TODO: We assume that the pixel data is always in RGBA format.
+    // It might not always be the case.
+    // We could examine the SDL_Surface for the format of the pixel data.
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
     glBindTexture(GL_TEXTURE_2D, 0);
 
     quad[0] =-w/2;  quad[1] =-w/2;
@@ -49,7 +52,7 @@ void Sprite::LoadImage(const char *filePath)
     SDL_FreeSurface(img);
 }
 
-void Sprite::Draw()
+void Sprite::draw()
 {
     glPushMatrix();
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -62,19 +65,19 @@ void Sprite::Draw()
     glPopMatrix();
 }
 
-void Sprite::Rotate(int _angle)
+void Sprite::rotate(int _angle)
 {
     angle = _angle;
 }
 
-void Sprite::Color(Uint8 _r, Uint8 _g, Uint8 _b)
+void Sprite::color(Uint8 _r, Uint8 _g, Uint8 _b)
 {
     sprite_color[0] = sprite_color[3] = sprite_color[6] = sprite_color[9] = _r / 255.0f;
     sprite_color[1] = sprite_color[4] = sprite_color[7] = sprite_color[10] = _g / 255.0f;
     sprite_color[2] = sprite_color[5] = sprite_color[8] = sprite_color[11] = _b / 255.0f;
 }
 
-void Sprite::SetPosition(int _x, int _y)
+void Sprite::setPosition(int _x, int _y)
 {
     x = _x;
     y = _y;

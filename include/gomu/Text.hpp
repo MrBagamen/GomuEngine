@@ -1,5 +1,5 @@
-#ifndef DRAWTEXT_HPP_INCLUDED
-#define DRAWTEXT_HPP_INCLUDED
+#ifndef GOMU_DRAWTEXT_HPP
+#define GOMU_DRAWTEXT_HPP
 
 #include <SDL_ttf.h>
 #include <SDL.h>
@@ -36,4 +36,4 @@ private:
 
 }
 
-#endif
+#endif // GOMU_DRAWTEXT_HPP

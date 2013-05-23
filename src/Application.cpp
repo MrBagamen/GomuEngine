@@ -8,10 +8,14 @@
 namespace gomu
 {
 
+// Internally used pointer to the instance of gomu::Application
+Application* _application;
+
 Application::Application(int width, int height, const std::string &title) :
     m_width(width),
     m_height(height),
-    m_title(title)
+    m_title(title),
+    m_state(nullptr)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING))
     {
@@ -41,8 +45,6 @@ Application::Application(int width, int height, const std::string &title) :
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
 
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -64,6 +66,16 @@ Application::Application(int width, int height, const std::string &title) :
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    m_keyState = SDL_GetKeyState(nullptr);
+    _application = this;
+}
+
+Application::~Application()
+{
+    TTF_Quit();
+    IMG_Quit();
+    SDL_Quit();
 }
 
 void Application::addState(State *state, const std::string &name)
@@ -78,6 +90,12 @@ void Application::setState(const std::string &name)
 
 int Application::exec()
 {
+    if (!m_state)
+    {
+        puts("Error: No state set. Exiting.");
+        return 1;
+    }
+
     for (;;)
     {
         SDL_Event event;
@@ -91,12 +109,9 @@ int Application::exec()
         }
 
         m_state->onUpdate(1);
-        glClear(GL_COLOR_BUFFER_BIT);
         m_state->onDraw();
         SDL_GL_SwapBuffers();
     }
 }
-
-
 
 }
