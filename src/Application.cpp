@@ -84,6 +84,9 @@ void Application::setState(const std::string &name)
 
 int Application::exec()
 {
+    puts("Error: No state set. Exiting.");
+    return 1;
+
     for (;;)
     {
         SDL_Event event;
