@@ -24,25 +24,6 @@ public:
         text3.textColor(100, 100, 255);
         text3.setString("This is third font!");
         text3.setPosition(32, 256);
-
-        sprite1.loadImage("res/test.png");
-        sprite1.setPosition(32, 350);
-        //sprite1.Color(255, 255, 0);
-    }
-
-    void onUpdate(double dt)
-    {
-        if (gomu::isKeyDown(SDLK_LEFT))
-        {
-            --angle;
-        }
-
-        else if (gomu::isKeyDown(SDLK_RIGHT))
-        {
-            ++angle;
-        }
-
-        sprite1.rotate(angle);
     }
 
     void onDraw()
@@ -51,15 +32,11 @@ public:
         text1.draw();
         text2.draw();
         text3.draw();
-
-        sprite1.draw();
     }
 
     gomu::Text text1;
     gomu::Text text2;
     gomu::Text text3;
-    gomu::Sprite sprite1;
-    int angle = 0;
 };
 
 int main()

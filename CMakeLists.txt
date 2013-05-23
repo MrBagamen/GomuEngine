@@ -55,6 +55,7 @@ function(addTest name)
 endfunction()
 
 addTest(Text)
+addTest(Sticks)
 
 # Installation
 install(FILES ${HEADERS} DESTINATION include/gomu)
