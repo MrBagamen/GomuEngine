@@ -31,6 +31,15 @@ public:
         scoreText.setString("Score: 0");
     }
 
+    void onKeyPress(SDLKey key)
+    {
+        if (key == SDLK_RETURN && SDL_GetModState() & KMOD_LALT)
+        {
+            puts("Toggling fullscreen.");
+            fflush(stdout);
+        }
+    }
+
     void onUpdate(double dt)
     {
         if (gomu::isKeyDown(SDLK_LEFT))

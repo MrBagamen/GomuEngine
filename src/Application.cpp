@@ -106,6 +106,10 @@ int Application::exec()
             {
                 return 0;
             }
+            else if (event.type == SDL_KEYDOWN)
+            {
+                m_state->onKeyPress(event.key.keysym.sym);
+            }
         }
 
         m_state->onUpdate(1);
