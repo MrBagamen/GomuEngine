@@ -29,14 +29,23 @@ public:
         stick.sprite.loadImage("res/stick.png");
         scoreText.loadFont("res/fast99.ttf", 16);
         scoreText.setString("Score: 0");
+        fsText.loadFont("res/fast99.ttf", 16);
+        fsText.setString("Fullscreen: off - Alt-enter to toggle");
+        fsText.setPosition(0, 16);
     }
 
     void onKeyPress(SDLKey key)
     {
         if (key == SDLK_RETURN && SDL_GetModState() & KMOD_LALT)
         {
-            puts("Toggling fullscreen.");
-            fflush(stdout);
+            if (gomu::toggleFullscreen())
+            {
+                fsText.setString("Fullscreen: on - Alt-enter to toggle");
+            }
+            else
+            {
+                fsText.setString("Fullscreen: off - Alt-enter to toggle");
+            }
         }
     }
 
@@ -74,16 +83,17 @@ public:
         ball.draw();
         stick.draw();
         scoreText.draw();
+        fsText.draw();
     }
 
     Entity ball, stick;
     int score = 0;
-    gomu::Text scoreText;
+    gomu::Text scoreText, fsText;
 };
 
 int main()
 {
-    gomu::Application app(640, 480, "Pickin' Sticks");
+    gomu::Application app(640, 480, false, "Pickin' Sticks");
     app.addState(new Sticks, "sticks");
     app.setState("sticks");
     return app.exec();
