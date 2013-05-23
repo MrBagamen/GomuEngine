@@ -75,6 +75,11 @@ Application::Application(int width, int height, bool fullscreen = false, const s
 
 Application::~Application()
 {
+    for (auto& pair : m_states)
+    {
+        delete pair.second;
+    }
+
     TTF_Quit();
     IMG_Quit();
     SDL_Quit();
