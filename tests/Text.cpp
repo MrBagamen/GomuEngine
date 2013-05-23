@@ -24,10 +24,10 @@ public:
         text3.setString("This is third font!");
         text3.setPosition(32, 256);
 
-        sprite1.LoadImage("res/test.png");
-        sprite1.SetPosition(32, 350);
+        sprite1.loadImage("res/test.png");
+        sprite1.setPosition(32, 350);
         //sprite1.Color(255, 255, 0);
-        sprite1.Rotate(45);
+        sprite1.rotate(45);
     }
 
     void onDraw()
@@ -36,7 +36,7 @@ public:
         text2.draw();
         text3.draw();
 
-        sprite1.Draw();
+        sprite1.draw();
     }
 
     gomu::Text text1;
