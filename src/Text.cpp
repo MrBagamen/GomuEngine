@@ -22,6 +22,11 @@ Text::Text() :
 {
 }
 
+Text::~Text()
+{
+    glDeleteTextures(1, &texture);
+}
+
 void Text::update()
 {
     if (string.empty() || !m_font)
