@@ -1,5 +1,5 @@
-#ifndef SPRITE_HPP
-#define SPRITE_HPP
+#ifndef GOMU_SPRITE_HPP
+#define GOMU_SPRITE_HPP
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -28,4 +28,5 @@ private:
 };
 
 }
-#endif // SPRITE_HPP
+
+#endif // GOMU_SPRITE_HPP
