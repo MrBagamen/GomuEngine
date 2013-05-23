@@ -2,6 +2,7 @@
 #include <gomu/Text.hpp>
 #include <gomu/Sprite.hpp>
 #include <gomu/State.hpp>
+#include <gomu/input.hpp>
 
 class Text : public gomu::State {
 public:
@@ -27,7 +28,21 @@ public:
         sprite1.loadImage("res/test.png");
         sprite1.setPosition(32, 350);
         //sprite1.Color(255, 255, 0);
-        sprite1.rotate(45);
+    }
+
+    void onUpdate(double dt)
+    {
+        if (gomu::isKeyDown(SDLK_LEFT))
+        {
+            --angle;
+        }
+
+        else if (gomu::isKeyDown(SDLK_RIGHT))
+        {
+            ++angle;
+        }
+
+        sprite1.rotate(angle);
     }
 
     void onDraw()
@@ -43,6 +58,7 @@ public:
     gomu::Text text2;
     gomu::Text text3;
     gomu::Sprite sprite1;
+    int angle = 0;
 };
 
 int main()

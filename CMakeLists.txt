@@ -28,6 +28,7 @@ include/gomu/Text.hpp
 include/gomu/Sprite.hpp
 include/gomu/State.hpp
 include/gomu/Application.hpp
+include/gomu/input.hpp
 )
 
 # Add library
@@ -35,6 +36,7 @@ add_library(GomuEngine
 src/Text.cpp
 src/Sprite.cpp
 src/Application.cpp
+src/input.cpp
 ${HEADERS}
 )
 

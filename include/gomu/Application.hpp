@@ -5,6 +5,8 @@
 #include <map>
 #include <gomu/State.hpp>
 
+#include <SDL.h>
+
 namespace gomu
 {
 
@@ -21,6 +23,8 @@ private:
     const std::string& m_title;
     std::map<std::string, State*> m_states;
     State* m_state;
+    Uint8* m_keyState;
+    friend bool isKeyDown(SDLKey);
 };
 
 }

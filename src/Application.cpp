@@ -8,6 +8,9 @@
 namespace gomu
 {
 
+// Internally used pointer to the instance of gomu::Application
+Application* _application;
+
 Application::Application(int width, int height, const std::string &title) :
     m_width(width),
     m_height(height),
@@ -64,6 +67,9 @@ Application::Application(int width, int height, const std::string &title) :
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+    m_keyState = SDL_GetKeyState(nullptr);
+    _application = this;
 }
 
 void Application::addState(State *state, const std::string &name)
@@ -96,7 +102,5 @@ int Application::exec()
         SDL_GL_SwapBuffers();
     }
 }
-
-
 
 }
