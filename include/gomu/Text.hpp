@@ -15,6 +15,7 @@ class Text
 {
 public:
     Text();
+    ~Text();
     void setFont(const Font& font);
 	void textColor(Uint8 _r, Uint8 _g, Uint8 _b);
     void setString(const std::string &string);

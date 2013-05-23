@@ -22,6 +22,11 @@ Text::Text() :
 {
 }
 
+Text::~Text()
+{
+    glDeleteTextures(1, &texture);
+}
+
 void Text::update()
 {
     if (string.empty() || !m_font)
@@ -39,6 +44,7 @@ void Text::update()
     quad[2] = img->w;quad[3] = 0.0f;
     quad[4] = img->w;quad[5] = img->h;
     quad[6] = 0.0f;  quad[7] = img->h;
+    SDL_FreeSurface(img);
 }
 
 void Text::setFont(const Font &font)

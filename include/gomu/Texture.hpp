@@ -15,6 +15,7 @@ public:
     int getWidth() const;
     int getHeight() const;
     void bind() const;
+    ~Texture();
 private:
     GLuint m_handle;
     int m_width, m_height;
