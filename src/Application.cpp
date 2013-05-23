@@ -14,7 +14,8 @@ Application* _application;
 Application::Application(int width, int height, const std::string &title) :
     m_width(width),
     m_height(height),
-    m_title(title)
+    m_title(title),
+    m_state(nullptr)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING))
     {
@@ -91,8 +92,11 @@ void Application::setState(const std::string &name)
 
 int Application::exec()
 {
-    puts("Error: No state set. Exiting.");
-    return 1;
+    if (!m_state)
+    {
+        puts("Error: No state set. Exiting.");
+        return 1;
+    }
 
     for (;;)
     {
