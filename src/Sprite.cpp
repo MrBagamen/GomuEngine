@@ -30,7 +30,7 @@ void Sprite::loadImage(const char *filePath)
         printf("Error: %s\n", IMG_GetError());
         exit(1);
     }
-    printf("Loaded %s\n", filePath);
+
     w = img->w;
     h = img->h;
 
