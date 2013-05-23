@@ -45,8 +45,6 @@ Application::Application(int width, int height, const std::string &title) :
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
 
-    glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -111,7 +109,6 @@ int Application::exec()
         }
 
         m_state->onUpdate(1);
-        glClear(GL_COLOR_BUFFER_BIT);
         m_state->onDraw();
         SDL_GL_SwapBuffers();
     }
