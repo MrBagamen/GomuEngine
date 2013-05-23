@@ -9,9 +9,9 @@ namespace gomu
 class State
 {
 protected:
-    virtual void onUpdate(double dt) {}
+    virtual void onUpdate(double dt) {(void)(dt);}
     virtual void onDraw() {}
-    virtual void onKeyPress(SDLKey key) {}
+    virtual void onKeyPress(SDLKey key) {(void)(key);}
     friend class Application;
 };
 
