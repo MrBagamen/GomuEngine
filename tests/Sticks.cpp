@@ -25,10 +25,34 @@ public:
     Sticks()
     {
         glClearColor(0.2f, 0.7f, 0.2f, 1.0f);
-        ball.sprite.loadImage("res/ball.png");
-        stick.sprite.loadImage("res/stick.png");
-        scoreText.loadFont("res/fast99.ttf", 16);
+        ballTexture.loadFromFile("res/ball.png");
+        stickTexture.loadFromFile("res/stick.png");
+        ball.sprite.setTexture(ballTexture);
+        stick.sprite.setTexture(stickTexture);
+        stick2.sprite.setTexture(stickTexture);
+        stick2.x = 100;
+        stick2.y = 100;
+        font.openFromFile("res/fast99.ttf", 16);
+        scoreText.setFont(font);
         scoreText.setString("Score: 0");
+        fsText.setFont(font);
+        fsText.setString("Fullscreen: off - Alt-enter to toggle");
+        fsText.setPosition(0, 16);
+    }
+
+    void onKeyPress(SDLKey key)
+    {
+        if (key == SDLK_RETURN && SDL_GetModState() & KMOD_LALT)
+        {
+            if (gomu::toggleFullscreen())
+            {
+                fsText.setString("Fullscreen: on - Alt-enter to toggle");
+            }
+            else
+            {
+                fsText.setString("Fullscreen: off - Alt-enter to toggle");
+            }
+        }
     }
 
     void onUpdate(double dt)
@@ -50,6 +74,9 @@ public:
             ball.y += 4;
         }
 
+        stick2.x = rand() % (640 - 32);
+        stick2.y = rand() % (480 - 32);
+
         if (collision(ball, stick))
         {
             stick.x = rand() % (640 - 32);
@@ -64,17 +91,22 @@ public:
         glClear(GL_COLOR_BUFFER_BIT);
         ball.draw();
         stick.draw();
+        stick2.sprite.color(rand(), rand(), rand());
+        stick2.draw();
         scoreText.draw();
+        fsText.draw();
     }
 
-    Entity ball, stick;
+    Entity ball, stick, stick2;
     int score = 0;
-    gomu::Text scoreText;
+    gomu::Texture ballTexture, stickTexture;
+    gomu::Font font;
+    gomu::Text scoreText, fsText;
 };
 
 int main()
 {
-    gomu::Application app(640, 480, "Pickin' Sticks");
+    gomu::Application app(640, 480, false, "Pickin' Sticks");
     app.addState(new Sticks, "sticks");
     app.setState("sticks");
     return app.exec();

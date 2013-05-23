@@ -10,12 +10,14 @@ namespace gomu
 
 // Internally used pointer to the instance of gomu::Application
 Application* _application;
+constexpr int VIDEOFLAGS = SDL_HWSURFACE | SDL_OPENGL;
 
-Application::Application(int width, int height, const std::string &title) :
+Application::Application(int width, int height, bool fullscreen = false, const std::string &title) :
     m_width(width),
     m_height(height),
     m_title(title),
-    m_state(nullptr)
+    m_state(nullptr),
+    m_fullscreen(fullscreen)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING))
     {
@@ -28,7 +30,7 @@ Application::Application(int width, int height, const std::string &title) :
         throw;
     }
 
-    if (!SDL_SetVideoMode(m_width, m_height, 32, SDL_HWSURFACE | SDL_OPENGL))
+    if (!SDL_SetVideoMode(m_width, m_height, 32, (m_fullscreen? VIDEOFLAGS | SDL_FULLSCREEN : VIDEOFLAGS)))
     {
         printf("Error setting video mode: %s\n", SDL_GetError());
         throw;
@@ -106,12 +108,23 @@ int Application::exec()
             {
                 return 0;
             }
+            else if (event.type == SDL_KEYDOWN)
+            {
+                m_state->onKeyPress(event.key.keysym.sym);
+            }
         }
 
         m_state->onUpdate(1);
         m_state->onDraw();
         SDL_GL_SwapBuffers();
     }
+}
+
+bool toggleFullscreen()
+{
+    _application->m_fullscreen = !(_application->m_fullscreen);
+    SDL_SetVideoMode(_application->m_width, _application->m_height, 32, (_application->m_fullscreen? VIDEOFLAGS | SDL_FULLSCREEN : VIDEOFLAGS));
+    return _application->m_fullscreen;
 }
 
 }
