@@ -2,10 +2,11 @@
 #include <gomu/input.hpp>
 #include <gomu/Sprite.hpp>
 #include <gomu/Text.hpp>
+#include <gomu/Sound.hpp>
 
 struct Entity {
     gomu::Sprite sprite;
-    int x = 0 , y = 0;
+    int x = 64 , y = 128;
     void draw()
     {
         sprite.setPosition(x, y);
@@ -29,15 +30,18 @@ public:
         stickTexture.loadFromFile("res/stick.png");
         ball.sprite.setTexture(ballTexture);
         stick.sprite.setTexture(stickTexture);
-        stick2.sprite.setTexture(stickTexture);
-        stick2.x = 100;
-        stick2.y = 100;
         font.openFromFile("res/fast99.ttf", 16);
         scoreText.setFont(font);
         scoreText.setString("Score: 0");
         fsText.setFont(font);
         fsText.setString("Fullscreen: off - Alt-enter to toggle");
         fsText.setPosition(0, 16);
+        exText.setFont(font);
+        exText.setString("Press Escape to exit");
+        exText.setPosition(0, 32);
+
+        sound1.loadFromFile("res/test.ogg");
+        srand(time(NULL));
     }
 
     void onKeyPress(SDLKey key)
@@ -52,6 +56,10 @@ public:
             {
                 fsText.setString("Fullscreen: off - Alt-enter to toggle");
             }
+        }
+        if (key == SDLK_ESCAPE)
+        {
+            //OK PUT SHIT HERE
         }
     }
 
@@ -74,15 +82,13 @@ public:
             ball.y += 4;
         }
 
-        stick2.x = rand() % (640 - 32);
-        stick2.y = rand() % (480 - 32);
-
         if (collision(ball, stick))
         {
             stick.x = rand() % (640 - 32);
             stick.y = rand() % (480 - 32);
             ++score;
             scoreText.setString("Score: " + std::to_string(score));
+            sound1.play();
         }
     }
 
@@ -91,17 +97,17 @@ public:
         glClear(GL_COLOR_BUFFER_BIT);
         ball.draw();
         stick.draw();
-        stick2.sprite.color(rand(), rand(), rand());
-        stick2.draw();
         scoreText.draw();
         fsText.draw();
+        exText.draw();
     }
 
-    Entity ball, stick, stick2;
+    Entity ball, stick;
     int score = 0;
     gomu::Texture ballTexture, stickTexture;
     gomu::Font font;
-    gomu::Text scoreText, fsText;
+    gomu::Text scoreText, fsText, exText;
+    gomu::Sound sound1;
 };
 
 int main()

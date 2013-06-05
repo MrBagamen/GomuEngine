@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 2.8)
 find_package(SDL REQUIRED)
 find_package(SDL_image REQUIRED)
 find_package(SDL_ttf REQUIRED)
+find_package(SDL_mixer REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
@@ -31,6 +32,7 @@ include/gomu/Application.hpp
 include/gomu/input.hpp
 include/gomu/Font.hpp
 include/gomu/Texture.hpp
+include/gomu/Sound.hpp
 )
 
 # Add library
@@ -41,6 +43,7 @@ src/Application.cpp
 src/input.cpp
 src/Font.cpp
 src/Texture.cpp
+src/Sound.cpp
 ${HEADERS}
 )
 
@@ -48,6 +51,7 @@ target_link_libraries(GomuEngine
 ${SDL_LIBRARY}
 ${SDLIMAGE_LIBRARY}
 ${SDLTTF_LIBRARY}
+${SDLMIXER_LIBRARY}
 ${GLEW_LIBRARY}
 ${OPENGL_LIBRARY}
 )

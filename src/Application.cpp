@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include <GL/glew.h>
 
 namespace gomu
@@ -77,6 +78,7 @@ Application::~Application()
 {
     TTF_Quit();
     IMG_Quit();
+    Mix_CloseAudio();
     SDL_Quit();
 }
 
