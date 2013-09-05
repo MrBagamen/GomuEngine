@@ -7,7 +7,7 @@ find_package(OpenGL REQUIRED)
 
 # Add additional flags to GCC based compilers
 if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-    add_definitions("-std=c++11 -pedantic -Wall -Wextra")
+    add_definitions("-std=c++11 -pedantic -Wall -Wextra -Wshadow")
 endif ()
 
 # Include GomuEngine include directory

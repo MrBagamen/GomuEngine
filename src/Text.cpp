@@ -29,12 +29,12 @@ Text::~Text()
 
 void Text::update()
 {
-    if (string.empty() || !m_font)
+    if (m_string.empty() || !m_font)
     {
         return;
     }
     default_color = {255, 255, 255, 0};
-    img = TTF_RenderText_Blended(m_font->handle, string.c_str(), default_color);
+    img = TTF_RenderText_Blended(m_font->handle, m_string.c_str(), default_color);
     glDeleteTextures(1, &texture);
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -62,7 +62,7 @@ void Text::textColor(Uint8 _r, Uint8 _g, Uint8 _b)
 
 void Text::setString(const std::string& string)
 {
-    this->string = string;
+    m_string = string;
     update();
 }
 

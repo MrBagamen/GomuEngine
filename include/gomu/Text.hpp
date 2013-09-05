@@ -18,7 +18,7 @@ public:
     ~Text();
     void setFont(const Font& font);
 	void textColor(Uint8 _r, Uint8 _g, Uint8 _b);
-    void setString(const std::string &string);
+    void setString(const std::string &m_string);
 	void setPosition(int _x, int _y);
     void draw();
 private:
@@ -33,7 +33,7 @@ private:
     GLfloat text_color[12];
     SDL_Color default_color;
     const Font* m_font;
-    std::string string;
+    std::string m_string;
 };
 
 }
