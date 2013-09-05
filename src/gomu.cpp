@@ -1,4 +1,4 @@
-#include <gomu/Application.hpp>
+#include <gomu/gomu.hpp>
 
 #include <SDL.h>
 #include <SDL_image.h>
@@ -9,17 +9,26 @@
 namespace gomu
 {
 
-// Internally used pointer to the instance of gomu::Application
-Application* _application;
+int m_width;
+int m_height;
+std::string m_title;
+std::map<std::string, State*> m_states;
+State* m_state;
+const Uint8* m_keyState;
+bool m_fullscreen;
+SDL_Window* m_window;
+SDL_GLContext m_glcontext;
 
-Application::Application(int width, int height, bool fullscreen = false, const std::string &title) :
-    m_width(width),
-    m_height(height),
-    m_title(title),
-    m_state(nullptr),
-    m_fullscreen(fullscreen),
-    m_window(nullptr)
+void init(int width, int height, bool fullscreen, const std::string &title)
 {
+    m_width = width;
+    m_height = height;
+    m_title = title;
+    m_state = nullptr;
+    m_fullscreen = fullscreen;
+    m_window = nullptr;
+    m_glcontext = nullptr;
+
     if (SDL_Init(SDL_INIT_EVERYTHING))
     {
         printf("Error initializing SDL: %s\n", SDL_GetError());
@@ -79,10 +88,9 @@ Application::Application(int width, int height, bool fullscreen = false, const s
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     m_keyState = SDL_GetKeyboardState(nullptr);
-    _application = this;
 }
 
-Application::~Application()
+void quit()
 {
     for (auto& pair : m_states)
     {
@@ -97,17 +105,17 @@ Application::~Application()
     SDL_Quit();
 }
 
-void Application::addState(State *state, const std::string &name)
+void addState(State *state, const std::string &name)
 {
     m_states[name] = state;
 }
 
-void Application::setState(const std::string &name)
+void setState(const std::string &name)
 {
     m_state = m_states[name];
 }
 
-int Application::exec()
+int exec()
 {
     if (!m_state)
     {
@@ -139,11 +147,11 @@ int Application::exec()
 
 bool toggleFullscreen()
 {
-    _application->m_fullscreen = !(_application->m_fullscreen);
+    m_fullscreen = !m_fullscreen;
 
-    SDL_SetWindowFullscreen(_application->m_window, (_application->m_fullscreen ? SDL_WINDOW_FULLSCREEN : 0));
+    SDL_SetWindowFullscreen(m_window, (m_fullscreen ? SDL_WINDOW_FULLSCREEN : 0));
 
-    return _application->m_fullscreen;
+    return m_fullscreen;
 }
 
 }

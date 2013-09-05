@@ -1,4 +1,4 @@
-#include <gomu/Application.hpp>
+#include <gomu/gomu.hpp>
 #include <gomu/input.hpp>
 #include <gomu/Sprite.hpp>
 #include <gomu/Text.hpp>
@@ -112,8 +112,8 @@ public:
 
 int main()
 {
-    gomu::Application app(640, 480, false, "Pickin' Sticks");
-    app.addState(new Sticks, "sticks");
-    app.setState("sticks");
-    return app.exec();
+    gomu::init(640, 480, false, "Pickin' Sticks");
+    gomu::addState(new Sticks, "sticks");
+    gomu::setState("sticks");
+    return gomu::exec();
 }

@@ -1,4 +1,4 @@
-#include <gomu/Application.hpp>
+#include <gomu/gomu.hpp>
 #include <gomu/Text.hpp>
 #include <gomu/Sprite.hpp>
 #include <gomu/State.hpp>
@@ -39,9 +39,9 @@ public:
 
 int main()
 {
-    gomu::Application app(1024, 768, false, "Font rendering test");
-    app.addState(new Text(), "text");
-    app.setState("text");
-    return app.exec();
+    gomu::init(1024, 768, false, "Font rendering test");
+    gomu::addState(new Text(), "text");
+    gomu::setState("text");
+    return gomu::exec();
 }
 
