@@ -74,7 +74,7 @@ void Text::draw()
     glVertexPointer(2, GL_FLOAT, 0, quad);
     glColorPointer(3, GL_FLOAT, 0, text_color);
     glTexCoordPointer(2, GL_FLOAT, 0, texcoord);
-    glDrawArrays(GL_QUADS, 0, 8);
+    glDrawArrays(GL_QUADS, 0, 4);
     glPopMatrix();
 }
 
