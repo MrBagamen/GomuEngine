@@ -11,14 +11,14 @@ namespace gomu
 
 // Internally used pointer to the instance of gomu::Application
 Application* _application;
-constexpr int VIDEOFLAGS = SDL_HWSURFACE | SDL_OPENGL;
 
 Application::Application(int width, int height, bool fullscreen = false, const std::string &title) :
     m_width(width),
     m_height(height),
     m_title(title),
     m_state(nullptr),
-    m_fullscreen(fullscreen)
+    m_fullscreen(fullscreen),
+    m_window(nullptr)
 {
     if (SDL_Init(SDL_INIT_EVERYTHING))
     {
@@ -31,13 +31,20 @@ Application::Application(int width, int height, bool fullscreen = false, const s
         throw;
     }
 
-    if (!SDL_SetVideoMode(m_width, m_height, 32, (m_fullscreen? VIDEOFLAGS | SDL_FULLSCREEN : VIDEOFLAGS)))
+    int videoflags = SDL_WINDOW_OPENGL;
+
+    if (m_fullscreen)
+    {
+        videoflags |= SDL_WINDOW_FULLSCREEN;
+    }
+
+    m_window = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_width, m_height, videoflags);
+
+    if (!m_window)
     {
         printf("Error setting video mode: %s\n", SDL_GetError());
         throw;
     }
-
-    SDL_WM_SetCaption(m_title.c_str(), nullptr);
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -70,7 +77,7 @@ Application::Application(int width, int height, bool fullscreen = false, const s
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    m_keyState = SDL_GetKeyState(nullptr);
+    m_keyState = SDL_GetKeyboardState(nullptr);
     _application = this;
 }
 
@@ -123,14 +130,16 @@ int Application::exec()
 
         m_state->onUpdate(1);
         m_state->onDraw();
-        SDL_GL_SwapBuffers();
+        SDL_GL_SwapWindow(m_window);
     }
 }
 
 bool toggleFullscreen()
 {
     _application->m_fullscreen = !(_application->m_fullscreen);
-    SDL_SetVideoMode(_application->m_width, _application->m_height, 32, (_application->m_fullscreen? VIDEOFLAGS | SDL_FULLSCREEN : VIDEOFLAGS));
+
+    SDL_SetWindowFullscreen(_application->m_window, (_application->m_fullscreen ? SDL_WINDOW_FULLSCREEN : 0));
+
     return _application->m_fullscreen;
 }
 

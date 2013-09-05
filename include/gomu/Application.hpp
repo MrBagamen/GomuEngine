@@ -24,9 +24,10 @@ private:
     const std::string& m_title;
     std::map<std::string, State*> m_states;
     State* m_state;
-    Uint8* m_keyState;
+    const Uint8* m_keyState;
     bool m_fullscreen;
-    friend bool isKeyDown(SDLKey);
+    SDL_Window* m_window;
+    friend bool isKeyDown(SDL_Keycode);
     friend bool toggleFullscreen();
 };
 

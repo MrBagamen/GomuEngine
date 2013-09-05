@@ -44,7 +44,7 @@ public:
         srand(time(NULL));
     }
 
-    void onKeyPress(SDLKey key)
+    void onKeyPress(SDL_Keycode key)
     {
         if (key == SDLK_RETURN && SDL_GetModState() & KMOD_LALT)
         {

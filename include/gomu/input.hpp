@@ -6,7 +6,7 @@
 namespace gomu
 {
 
-bool isKeyDown(SDLKey key);
+bool isKeyDown(SDL_Keycode key);
 
 }
 
