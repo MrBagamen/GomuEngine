@@ -44,9 +44,9 @@ public:
         srand(time(NULL));
     }
 
-    void onKeyPress(SDL_Keycode key)
+    void onKeyPress(SDL_Scancode key)
     {
-        if (key == SDLK_RETURN && SDL_GetModState() & KMOD_LALT)
+        if (key == SDL_SCANCODE_RETURN && SDL_GetModState() & KMOD_LALT)
         {
             if (gomu::toggleFullscreen())
             {
@@ -57,7 +57,7 @@ public:
                 fsText.setString("Fullscreen: off - Alt-enter to toggle");
             }
         }
-        if (key == SDLK_ESCAPE)
+        if (key == SDL_SCANCODE_ESCAPE)
         {
             //OK PUT SHIT HERE
         }
@@ -65,19 +65,19 @@ public:
 
     void onUpdate(double dt)
     {
-        if (gomu::isKeyDown(SDLK_LEFT))
+        if (gomu::isKeyDown(SDL_SCANCODE_LEFT))
         {
             ball.x -= 4;
         }
-        else if (gomu::isKeyDown(SDLK_RIGHT))
+        else if (gomu::isKeyDown(SDL_SCANCODE_RIGHT))
         {
             ball.x += 4;
         }
-        if (gomu::isKeyDown(SDLK_UP))
+        if (gomu::isKeyDown(SDL_SCANCODE_UP))
         {
             ball.y -= 4;
         }
-        else if (gomu::isKeyDown(SDLK_DOWN))
+        else if (gomu::isKeyDown(SDL_SCANCODE_DOWN))
         {
             ball.y += 4;
         }

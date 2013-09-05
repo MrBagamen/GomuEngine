@@ -39,6 +39,7 @@ Application::Application(int width, int height, bool fullscreen = false, const s
     }
 
     m_window = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_width, m_height, videoflags);
+    m_glcontext = SDL_GL_CreateContext(m_window);
 
     if (!m_window)
     {
@@ -88,6 +89,8 @@ Application::~Application()
         delete pair.second;
     }
 
+    SDL_GL_DeleteContext(m_glcontext);
+    SDL_DestroyWindow(m_window);
     TTF_Quit();
     IMG_Quit();
     Mix_CloseAudio();
@@ -124,7 +127,7 @@ int Application::exec()
             }
             else if (event.type == SDL_KEYDOWN)
             {
-                m_state->onKeyPress(event.key.keysym.sym);
+                m_state->onKeyPress(event.key.keysym.scancode);
             }
         }
 

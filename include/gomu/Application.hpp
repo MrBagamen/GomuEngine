@@ -27,7 +27,8 @@ private:
     const Uint8* m_keyState;
     bool m_fullscreen;
     SDL_Window* m_window;
-    friend bool isKeyDown(SDL_Keycode);
+    SDL_GLContext m_glcontext;
+    friend bool isKeyDown(SDL_Scancode);
     friend bool toggleFullscreen();
 };
 
