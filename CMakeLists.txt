@@ -2,10 +2,6 @@ project(GomuEngine)
 cmake_minimum_required(VERSION 2.8)
 
 # Find required libraries
-find_package(SDL REQUIRED)
-find_package(SDL_image REQUIRED)
-find_package(SDL_ttf REQUIRED)
-find_package(SDL_mixer REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
@@ -19,7 +15,7 @@ include_directories(include)
 
 # Include the right directories where the headers are found
 include_directories(
-${SDL_INCLUDE_DIR}
+"/usr/include/SDL2"
 ${GLEW_INCLUDE_DIR}
 ${OPENGL_INCLUDE_DIR}
 )
@@ -48,10 +44,7 @@ ${HEADERS}
 )
 
 target_link_libraries(GomuEngine
-${SDL_LIBRARY}
-${SDLIMAGE_LIBRARY}
-${SDLTTF_LIBRARY}
-${SDLMIXER_LIBRARY}
+SDL2 SDL2_image SDL2_ttf SDL2_mixer
 ${GLEW_LIBRARY}
 ${OPENGL_LIBRARY}
 )
