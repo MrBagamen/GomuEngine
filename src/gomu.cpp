@@ -77,6 +77,8 @@ void init(int width, int height, bool fullscreen, const std::string &title)
         throw;
     }
 
+    Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024);
+
     if(TTF_Init())
     {
         printf("Error initializing SDL_ttf: %s\n", TTF_GetError());
