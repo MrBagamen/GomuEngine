@@ -20,28 +20,11 @@ ${GLEW_INCLUDE_DIR}
 ${OPENGL_INCLUDE_DIR}
 )
 
-set(HEADERS
-include/gomu/Text.hpp
-include/gomu/Sprite.hpp
-include/gomu/State.hpp
-include/gomu/gomu.hpp
-include/gomu/input.hpp
-include/gomu/Font.hpp
-include/gomu/Texture.hpp
-include/gomu/Sound.hpp
-)
+file(GLOB_RECURSE HEADERS include/*.hpp)
+file(GLOB_RECURSE SOURCES src/*.*pp)
 
 # Add library
-add_library(GomuEngine
-src/Text.cpp
-src/Sprite.cpp
-src/gomu.cpp
-src/input.cpp
-src/Font.cpp
-src/Texture.cpp
-src/Sound.cpp
-${HEADERS}
-)
+add_library(GomuEngine ${SOURCES} ${HEADERS})
 
 target_link_libraries(GomuEngine
 SDL2 SDL2_image SDL2_ttf SDL2_mixer
