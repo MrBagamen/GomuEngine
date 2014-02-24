@@ -59,7 +59,7 @@ public:
         }
         if (key == SDL_SCANCODE_ESCAPE)
         {
-            //OK PUT SHIT HERE
+            gomu::quit();
         }
     }
 
