@@ -3,6 +3,7 @@
 #include <gomu/Sprite.hpp>
 #include <gomu/Text.hpp>
 #include <gomu/Sound.hpp>
+#include <iostream>
 
 struct Entity {
     gomu::Sprite sprite;
@@ -67,20 +68,21 @@ public:
     {
         if (gomu::isKeyDown(SDL_SCANCODE_LEFT))
         {
-            ball.x -= 4;
+            ball.x -= (100 * dt);
         }
         else if (gomu::isKeyDown(SDL_SCANCODE_RIGHT))
         {
-            ball.x += 4;
+            ball.x += (100 * dt);
         }
         if (gomu::isKeyDown(SDL_SCANCODE_UP))
         {
-            ball.y -= 4;
+            ball.y -= (100 * dt);
         }
         else if (gomu::isKeyDown(SDL_SCANCODE_DOWN))
         {
-            ball.y += 4;
+            ball.y += (100 * dt);
         }
+        std::cout << "Speed: " << 100*dt << std::endl;
 
         if (collision(ball, stick))
         {

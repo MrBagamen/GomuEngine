@@ -5,6 +5,7 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include <GL/glew.h>
+#include <gomu/Timer.hpp>
 
 namespace gomu
 {
@@ -128,6 +129,9 @@ int exec()
 
     m_running = true;
 
+    Timer deltaTime;
+    deltaTime.start();
+
     while (m_running)
     {
         SDL_Event event;
@@ -144,7 +148,9 @@ int exec()
             }
         }
 
-        m_state->onUpdate(1);
+        m_state->onUpdate(deltaTime.getTicks() / 1000.0f);
+        deltaTime.start(); //restart timer
+
         m_state->onDraw();
         SDL_GL_SwapWindow(m_window);
     }
