@@ -1,5 +1,4 @@
-#ifndef GOMU_APPLICATION_HPP
-#define GOMU_APPLICATION_HPP
+#pragma once
 
 #include <string>
 #include <map>
@@ -19,5 +18,3 @@ int exec();
 bool toggleFullscreen();
 
 }
-
-#endif // GOMU_APPLICATION_HPP

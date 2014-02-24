@@ -1,5 +1,4 @@
-#ifndef GOMU_FONT_HPP
-#define GOMU_FONT_HPP
+#pragma once
 
 #include <SDL_ttf.h>
 #include <string>
@@ -17,5 +16,3 @@ public:
 };
 
 }
-
-#endif // GOMU_FONT_HPP

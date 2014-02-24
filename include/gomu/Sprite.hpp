@@ -1,5 +1,4 @@
-#ifndef GOMU_SPRITE_HPP
-#define GOMU_SPRITE_HPP
+#pragma once
 
 #include <gomu/Texture.hpp>
 
@@ -27,5 +26,3 @@ private:
 };
 
 }
-
-#endif // GOMU_SPRITE_HPP
