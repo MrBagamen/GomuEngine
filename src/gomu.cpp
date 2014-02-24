@@ -18,6 +18,7 @@ const Uint8* m_keyState;
 bool m_fullscreen;
 SDL_Window* m_window;
 SDL_GLContext m_glcontext;
+bool m_running;
 
 void init(int width, int height, bool fullscreen, const std::string &title)
 {
@@ -92,7 +93,7 @@ void init(int width, int height, bool fullscreen, const std::string &title)
     m_keyState = SDL_GetKeyboardState(nullptr);
 }
 
-void quit()
+void cleanUp()
 {
     for (auto& pair : m_states)
     {
@@ -125,9 +126,9 @@ int exec()
         return 1;
     }
 
-    bool running = true;
+    m_running = true;
 
-    while (running)
+    while (m_running)
     {
         SDL_Event event;
 
@@ -135,7 +136,7 @@ int exec()
         {
             if (event.type == SDL_QUIT)
             {
-                running = false;
+                m_running = false;
             }
             else if (event.type == SDL_KEYDOWN)
             {
@@ -148,7 +149,7 @@ int exec()
         SDL_GL_SwapWindow(m_window);
     }
 
-    quit();
+    cleanUp();
     return 0;
 }
 
@@ -159,6 +160,11 @@ bool toggleFullscreen()
     SDL_SetWindowFullscreen(m_window, (m_fullscreen ? SDL_WINDOW_FULLSCREEN : 0));
 
     return m_fullscreen;
+}
+
+void quit()
+{
+    m_running = false;
 }
 
 }
