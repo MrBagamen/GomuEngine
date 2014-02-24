@@ -1,5 +1,4 @@
-#ifndef GOMU_TEXTURE_HPP
-#define GOMU_TEXTURE_HPP
+#pragma once
 
 #include <string>
 
@@ -22,5 +21,3 @@ private:
 };
 
 }
-
-#endif // GOMU_TEXTURE_HPP

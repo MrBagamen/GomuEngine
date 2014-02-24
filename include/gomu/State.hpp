@@ -1,5 +1,4 @@
-#ifndef GOMU_STATE_HPP
-#define GOMU_STATE_HPP
+#pragma once
 
 #include <SDL.h>
 
@@ -18,5 +17,3 @@ protected:
 };
 
 }
-
-#endif // GOMU_STATE_HPP

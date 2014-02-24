@@ -1,5 +1,4 @@
-#ifndef GOMU_DRAWTEXT_HPP
-#define GOMU_DRAWTEXT_HPP
+#pragma once
 
 #include <gomu/Font.hpp>
 
@@ -37,5 +36,3 @@ private:
 };
 
 }
-
-#endif // GOMU_DRAWTEXT_HPP

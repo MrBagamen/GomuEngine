@@ -1,5 +1,4 @@
-#ifndef GOMU_SOUND_HPP
-#define GOMU_SOUND_HPP
+#pragma once
 
 #include <string>
 #include <SDL.h>
@@ -19,5 +18,3 @@ private:
 };
 
 }
-
-#endif // GOMU_SOUND_HPP
