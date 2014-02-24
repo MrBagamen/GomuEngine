@@ -10,18 +10,27 @@ namespace gomu
 class Sprite
 {
 public:
-    void color(Uint8 _r, Uint8 _g, Uint8 _b);
+    void setColor(Uint8 r, Uint8 g, Uint8 b);
     void setTexture(const Texture& texture);
     void draw();
-    void setPosition(int _x, int _y);
-    void rotate(int angle);
-
-    Sprite();
+    void setPosition(int x, int y);
+    void setAngle(int angle);
+    Sprite() = default;
+    Sprite(const Texture& texture);
 private:
-    int x = 0, y = 0, angle;
-    GLfloat quad[8];
-    GLfloat texcoord[8];
-    GLfloat sprite_color[12];
+    int m_x{0}, m_y{0}, m_angle{0};
+    GLfloat m_quads[8];
+    const GLfloat m_texcoords[8]{
+        0.0f, 0.0f,
+        1.0f, 0.0f,
+        1.0f, 1.0f,
+        0.0f, 1.0f
+    };
+    GLfloat m_colors[12]{
+        1.0f, 1.0f, 1.0f, 1.0f,
+        1.0f, 1.0f, 1.0f, 1.0f,
+        1.0f, 1.0f, 1.0f, 1.0f
+    };
     const Texture* m_texture;
 };
 
