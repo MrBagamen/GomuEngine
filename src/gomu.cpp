@@ -125,7 +125,9 @@ int exec()
         return 1;
     }
 
-    for (;;)
+    bool running = true;
+
+    while (running)
     {
         SDL_Event event;
 
@@ -133,7 +135,7 @@ int exec()
         {
             if (event.type == SDL_QUIT)
             {
-                return 0;
+                running = false;
             }
             else if (event.type == SDL_KEYDOWN)
             {
@@ -145,6 +147,9 @@ int exec()
         m_state->onDraw();
         SDL_GL_SwapWindow(m_window);
     }
+
+    quit();
+    return 0;
 }
 
 bool toggleFullscreen()
