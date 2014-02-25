@@ -3,6 +3,7 @@
 #include <gomu/Sprite.hpp>
 #include <gomu/Text.hpp>
 #include <gomu/Sound.hpp>
+#include <gomu/Music.hpp>
 #include <iostream>
 
 struct Entity {
@@ -43,6 +44,8 @@ public:
         exText.setPosition(0, 32);
 
         sound1.loadFromFile("res/test.ogg");
+        music.loadFromFile("res/aa_arofl.xm");
+        music.play();
         srand(time(NULL));
     }
 
@@ -110,6 +113,7 @@ public:
     gomu::Font font;
     gomu::Text scoreText, fsText, exText;
     gomu::Sound sound1;
+    gomu::Music music;
 };
 
 int main()

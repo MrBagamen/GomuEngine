@@ -1,21 +1,20 @@
 #pragma once
 
-#include <string>
-#include <SDL.h>
 #include <SDL_mixer.h>
+#include <string>
 
 namespace gomu
 {
 
-class Sound
-{
+class Music {
 public:
     bool loadFromFile(const std::string& filename);
     void play();
-    ~Sound();
-
+    void setLooping(bool looping);
+    ~Music();
 private:
-    Mix_Chunk *m_chunk = nullptr;
+    Mix_Music* m_music = nullptr;
+    bool m_looping = false;
 };
 
 }
