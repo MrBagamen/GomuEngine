@@ -11,8 +11,9 @@ public:
     bool loadFromFile(const std::string& filename);
     void play();
     void setLooping(bool looping);
+    ~Music();
 private:
-    Mix_Music* m_music;
+    Mix_Music* m_music = nullptr;
     bool m_looping = false;
 };
 

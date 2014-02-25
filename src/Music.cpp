@@ -20,4 +20,13 @@ void Music::setLooping(bool looping)
     m_looping = looping;
 }
 
+Music::~Music()
+{
+    if (m_music)
+    {
+        Mix_HaltMusic();
+        Mix_FreeMusic(m_music);
+    }
+}
+
 }

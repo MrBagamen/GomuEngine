@@ -18,4 +18,10 @@ void Sound::play()
     Mix_PlayChannel(-1, m_chunk, false);
 }
 
+Sound::~Sound()
+{
+    if (m_chunk)
+        Mix_FreeChunk(m_chunk);
+}
+
 }

@@ -12,9 +12,10 @@ class Sound
 public:
     bool loadFromFile(const std::string& filename);
     void play();
+    ~Sound();
 
 private:
-    Mix_Chunk *m_chunk;
+    Mix_Chunk *m_chunk = nullptr;
 };
 
 }
