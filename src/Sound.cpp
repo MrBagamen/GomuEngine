@@ -5,7 +5,7 @@ namespace gomu
 
 bool Sound::loadFromFile(const std::string& filename)
 {
-    if(!(music = Mix_LoadMUS(filename.c_str())))
+    if(!(m_chunk = Mix_LoadWAV(filename.c_str())))
     {
         printf("Unable to load %s\n", filename.c_str());
         return false;
@@ -15,7 +15,7 @@ bool Sound::loadFromFile(const std::string& filename)
 
 void Sound::play()
 {
-    Mix_PlayMusic(music, 0);
+    Mix_PlayChannel(-1, m_chunk, false);
 }
 
 }
