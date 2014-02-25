@@ -7,7 +7,8 @@
 
 struct Entity {
     gomu::Sprite sprite;
-    int x = 64 , y = 128;
+    double x = 64 , y = 128;
+    int speed = 200;
     void draw()
     {
         sprite.setPosition(x, y);
@@ -68,19 +69,19 @@ public:
     {
         if (gomu::isKeyDown(SDL_SCANCODE_LEFT))
         {
-            ball.x -= (100 * dt);
+            ball.x -= (ball.speed * dt);
         }
         else if (gomu::isKeyDown(SDL_SCANCODE_RIGHT))
         {
-            ball.x += (100 * dt);
+            ball.x += (ball.speed * dt);
         }
         if (gomu::isKeyDown(SDL_SCANCODE_UP))
         {
-            ball.y -= (100 * dt);
+            ball.y -= (ball.speed * dt);
         }
         else if (gomu::isKeyDown(SDL_SCANCODE_DOWN))
         {
-            ball.y += (100 * dt);
+            ball.y += (ball.speed * dt);
         }
         std::cout << "Speed: " << 100*dt << std::endl;
 
