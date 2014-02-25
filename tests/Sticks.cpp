@@ -83,7 +83,6 @@ public:
         {
             ball.y += (ball.speed * dt);
         }
-        std::cout << "Speed: " << 100*dt << std::endl;
 
         if (collision(ball, stick))
         {
