@@ -14,13 +14,13 @@ public:
         text1.setFont(font1);
         text2.setFont(font2);
         text3.setFont(font3);
-        text1.textColor(255, 255, 0);
+        text1.setColor(255, 255, 0);
         text1.setString("This is first font!");
         text1.setPosition(32, 32);
-        text2.textColor(0, 255, 0);
+        text2.setColor(0, 255, 0);
         text2.setString("This is second font!");
         text2.setPosition(32, 128);
-        text3.textColor(100, 100, 255);
+        text3.setColor(100, 100, 255);
         text3.setString("This is third font!");
         text3.setPosition(32, 256);
     }
