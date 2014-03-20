@@ -53,7 +53,6 @@ public:
         //Testing shaders
         shader.Load("test.vert", "test.frag");
         shader.enable(true);
-        ball.sprite.setProgram(shader.program);
     }
 
     void onKeyPress(SDL_Scancode key)
@@ -124,7 +123,11 @@ public:
     void onDraw()
     {
         glClear(GL_COLOR_BUFFER_BIT);
+
+        //shader.enable(true);
         ball.draw();
+        //shader.enable(false);
+
         stick.draw();
         scoreText.draw();
         fsText.draw();

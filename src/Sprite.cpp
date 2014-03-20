@@ -12,11 +12,11 @@ void Sprite::draw()
 {
     glPushMatrix();
     m_texture->bind();
-    glUniform1i(glGetUniformLocation(*program, "texture"), 0);
     glTranslatef(m_x+m_texture->getWidth()/2, m_y+m_texture->getHeight()/2, 0.0f);
     glRotatef(m_angle, 0.0f, 0.0f, 1.0f);
     glColorPointer(3, GL_FLOAT, 0, m_colors);
     glTexCoordPointer(2, GL_FLOAT, 0, m_texcoords);
+    glVertexPointer(2, GL_FLOAT, 0, m_quads);
     glDrawArrays(GL_QUADS, 0, 8);
     glPopMatrix();
 }
@@ -24,11 +24,6 @@ void Sprite::draw()
 void Sprite::setAngle(int angle)
 {
     m_angle = angle;
-}
-
-void Sprite::setProgram(GLuint &_program)
-{
-    program = &_program;
 }
 
 void Sprite::setColor(Uint8 r, Uint8 g, Uint8 b)
