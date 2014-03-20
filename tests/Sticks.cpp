@@ -52,7 +52,8 @@ public:
 
         //Testing shaders
         shader.Load("test.vert", "test.frag");
-        //shader.enable(true);
+        shader.enable(true);
+        ball.sprite.setProgram(shader.program);
     }
 
     void onKeyPress(SDL_Scancode key)

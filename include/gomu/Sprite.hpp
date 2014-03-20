@@ -1,6 +1,7 @@
 #pragma once
 
 #include <gomu/Texture.hpp>
+#include <gomu/Shader.hpp>
 
 #include <SDL.h>
 
@@ -15,6 +16,7 @@ public:
     void draw();
     void setPosition(int x, int y);
     void setAngle(int angle);
+    void setProgram(GLuint &_program);
     Sprite() = default;
     Sprite(const Texture& texture);
 private:
@@ -32,6 +34,7 @@ private:
         1.0f, 1.0f, 1.0f, 1.0f
     };
     const Texture* m_texture;
+    GLuint *program;
 };
 
 }
