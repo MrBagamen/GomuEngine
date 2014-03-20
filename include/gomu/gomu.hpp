@@ -16,5 +16,6 @@ void setState(const std::string& name);
 int exec();
 
 bool toggleFullscreen();
+void setBackgroundColor(int r, int g, int b);
 
 }
