@@ -1,4 +1,5 @@
 #include "gomu/Shader.hpp"
+#include <vector>
 
 namespace gomu
 {
@@ -60,12 +61,15 @@ void Shader::Load(std::string vertex_shader, std::string fragment_shader)
     glCompileShader(vs);
     glCompileShader(fs);
 
-    char errV[strlen(vSauce)];
-    glGetShaderInfoLog(vs, strlen(vSauce), nullptr, errV);
-    char errF[strlen(fSauce)];
-    glGetShaderInfoLog(fs, strlen(vSauce), nullptr, errV);
-    std::cout << "Compile status: \n" << errV << std::endl;
-    std::cout << "Compile status: \n" << errF << std::endl;
+    GLint len;
+    glGetShaderiv(vs, GL_INFO_LOG_LENGTH, &len);
+    std::vector<char> errV(len);
+    glGetShaderInfoLog(vs, errV.size(), nullptr, errV.data());
+    glGetShaderiv(fs, GL_INFO_LOG_LENGTH, &len);
+    std::vector<char> errF(len);
+    glGetShaderInfoLog(fs, errF.size(), nullptr, errF.data());
+    std::cout << "Compile status: \n" << errV.data() << std::endl;
+    std::cout << "Compile status: \n" << errF.data() << std::endl;
 
     program = glCreateProgram();
     glAttachShader(program, vs);
