@@ -147,6 +147,7 @@ int exec()
         m_state->onUpdate(deltaTime.getTicks() / 1000.0f);
         deltaTime.start(); //restart timer
 
+        glClear(GL_COLOR_BUFFER_BIT);
         m_state->onDraw();
         SDL_GL_SwapWindow(m_window);
     }
@@ -167,6 +168,11 @@ bool toggleFullscreen()
 void quit()
 {
     m_running = false;
+}
+
+void setBackgroundColor(int r, int g, int b)
+{
+    glClearColor(r / 255.0f, g / 255.0f, b / 255.0f, 1.0f);
 }
 
 }

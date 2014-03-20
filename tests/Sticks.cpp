@@ -31,7 +31,7 @@ public:
 
     Sticks()
     {
-        glClearColor(0.2f, 0.7f, 0.2f, 1.0f);
+        gomu::setBackgroundColor(51, 178, 51);
         ballTexture.loadFromFile("res/ball.png");
         stickTexture.loadFromFile("res/stick.png");
         ball.sprite.setTexture(ballTexture);
@@ -135,8 +135,6 @@ public:
 
     void onDraw()
     {
-        glClear(GL_COLOR_BUFFER_BIT);
-
         //shader.enable(true);
         ball.draw();
         //shader.enable(false);
