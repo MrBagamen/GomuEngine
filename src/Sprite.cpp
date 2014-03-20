@@ -14,9 +14,9 @@ void Sprite::draw()
     m_texture->bind();
     glTranslatef(m_x+m_texture->getWidth()/2, m_y+m_texture->getHeight()/2, 0.0f);
     glRotatef(m_angle, 0.0f, 0.0f, 1.0f);
-    glVertexPointer(2, GL_FLOAT, 0, m_quads);
     glColorPointer(3, GL_FLOAT, 0, m_colors);
     glTexCoordPointer(2, GL_FLOAT, 0, m_texcoords);
+    glVertexPointer(2, GL_FLOAT, 0, m_quads);
     glDrawArrays(GL_QUADS, 0, 8);
     glPopMatrix();
 }
