@@ -43,8 +43,11 @@ public:
         fsText.setString("Fullscreen: off - Alt-enter to toggle");
         fsText.setPosition(0, 16);
         exText.setFont(font);
+        fpsText.setFont(font);
+        fpsText.setString("FPS: ");
+        fpsText.setPosition(0, 32);
         exText.setString("Press Escape to exit");
-        exText.setPosition(0, 32);
+        exText.setPosition(0, 48);
 
         sound1.loadFromFile("res/test.ogg");
         music.loadFromFile("res/aa_arofl.xm");
@@ -123,7 +126,7 @@ public:
         //Count FPS
         if(fpsTimer.getTicks() >= 1000)
         {
-            std::cout << "FPS: " << FPS << std::endl;
+            fpsText.setString("FPS: " + std::to_string(FPS));
             FPS = 0;
             fpsTimer.start(); //Restart timer
         }
@@ -142,6 +145,7 @@ public:
         scoreText.draw();
         fsText.draw();
         exText.draw();
+        fpsText.draw();
     }
 
     Entity ball, stick;
@@ -153,6 +157,7 @@ public:
     gomu::Music music;
     gomu::Shader shader;
     gomu::Timer fpsTimer;
+    gomu::Text fpsText;
     int FPS = 0;
 };
 
