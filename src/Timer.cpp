@@ -9,6 +9,8 @@ Timer::Timer()
     pausedTicks = 0;
     paused = false;
     started = false;
+
+    start();
 }
 
 void Timer::start()
