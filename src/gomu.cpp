@@ -6,6 +6,7 @@
 #include <SDL_mixer.h>
 #include <GL/glew.h>
 #include <gomu/Timer.hpp>
+#include "error.hpp"
 
 namespace gomu
 {
@@ -33,13 +34,11 @@ void init(int width, int height, bool fullscreen, const std::string &title)
 
     if (SDL_Init(SDL_INIT_EVERYTHING))
     {
-        printf("Error initializing SDL: %s\n", SDL_GetError());
-        throw;
+        error("Error initializing SDL: %s\n", SDL_GetError());
     }
     if (!IMG_Init(IMG_INIT_PNG))
     {
-        printf("Error initializing SDL_image: %s\n", IMG_GetError());
-        throw;
+        error("Error initializing SDL_image: %s\n", IMG_GetError());
     }
 
     int videoflags = SDL_WINDOW_OPENGL;
@@ -54,8 +53,7 @@ void init(int width, int height, bool fullscreen, const std::string &title)
 
     if (!m_window)
     {
-        printf("Error setting video mode: %s\n", SDL_GetError());
-        throw;
+        error("Error setting video mode: %s\n", SDL_GetError());
     }
 
     glMatrixMode(GL_PROJECTION);
@@ -75,16 +73,14 @@ void init(int width, int height, bool fullscreen, const std::string &title)
 
     if (err != GLEW_OK)
     {
-        printf("Error: %s\n", glewGetErrorString(err));
-        throw;
+        error("Error: %s\n", glewGetErrorString(err));
     }
 
     Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024);
 
     if(TTF_Init())
     {
-        printf("Error initializing SDL_ttf: %s\n", TTF_GetError());
-        throw;
+        error("Error initializing SDL_ttf: %s\n", TTF_GetError());
     }
 
     glEnable(GL_TEXTURE_2D);

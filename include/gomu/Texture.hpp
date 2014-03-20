@@ -10,7 +10,7 @@ namespace gomu
 class Texture
 {
 public:
-    bool loadFromFile(const std::string& filename);
+    void loadFromFile(const std::string& filename);
     int getWidth() const;
     int getHeight() const;
     void bind() const;

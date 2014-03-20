@@ -10,7 +10,7 @@ namespace gomu
 class Sound
 {
 public:
-    bool loadFromFile(const std::string& filename);
+    void loadFromFile(const std::string& filename);
     void play();
     ~Sound();
 

@@ -1,13 +1,15 @@
 #include "gomu/Music.hpp"
+#include "error.hpp"
 
 namespace gomu
 {
 
-bool Music::loadFromFile(const std::string &filename)
+void Music::loadFromFile(const std::string &filename)
 {
-    if ((m_music = Mix_LoadMUS(filename.c_str())))
-        return true;
-    return false;
+    if (!(m_music = Mix_LoadMUS(filename.c_str())))
+    {
+        error("Failed to load \"%s\": %s", filename.c_str(), Mix_GetError());
+    }
 }
 
 void Music::play()

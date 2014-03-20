@@ -8,7 +8,7 @@ namespace gomu
 
 class Music {
 public:
-    bool loadFromFile(const std::string& filename);
+    void loadFromFile(const std::string& filename);
     void play();
     void setLooping(bool looping);
     ~Music();
