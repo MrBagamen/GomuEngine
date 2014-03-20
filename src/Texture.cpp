@@ -1,18 +1,18 @@
 #include <gomu/Texture.hpp>
 
 #include <SDL_image.h>
+#include "error.hpp"
 
 namespace gomu
 {
 
-bool Texture::loadFromFile(const std::string& filename)
+void Texture::loadFromFile(const std::string& filename)
 {
     SDL_Surface *img = IMG_Load(filename.c_str());
 
     if(!img)
     {
-        printf("Error: %s\n", IMG_GetError());
-        return false;
+        error("Error: %s\n", IMG_GetError());
     }
 
     m_width = img->w;
@@ -27,7 +27,6 @@ bool Texture::loadFromFile(const std::string& filename)
     // We could examine the SDL_Surface for the format of the pixel data.
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
     SDL_FreeSurface(img);
-    return true;
 }
 
 int Texture::getWidth() const

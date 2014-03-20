@@ -1,16 +1,15 @@
 #include <gomu/Sound.hpp>
+#include "error.hpp"
 
 namespace gomu
 {
 
-bool Sound::loadFromFile(const std::string& filename)
+void Sound::loadFromFile(const std::string& filename)
 {
     if(!(m_chunk = Mix_LoadWAV(filename.c_str())))
     {
-        printf("Unable to load %s\n", filename.c_str());
-        return false;
+        error("Unable to load %s\n", filename.c_str());
     }
-    return true;
 }
 
 void Sound::play()
