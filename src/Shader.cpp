@@ -1,4 +1,5 @@
 #include "gomu/Shader.hpp"
+#include "error.hpp"
 
 #include <vector>
 #include <iostream>
@@ -25,15 +26,14 @@ void Shader::Load(std::string vertex_shader, std::string fragment_shader)
     //Load files
     std::ifstream inv(vertex_shader);
     std::ifstream inf(fragment_shader);
-    if(!inv.is_open())
+
+    if (!inv)
     {
-        std::cout << "Failed to load " << vertex_shader << std::endl;
-        return;
+        error("Failed to load \"%s\"", vertex_shader.c_str());
     }
-    if(!inf.is_open())
+    if (!inf)
     {
-        std::cout << "Failed to load " << fragment_shader << std::endl;
-        return;
+        error("Failed to load \"%s\"", fragment_shader.c_str());
     }
 
     char buffer[500];
