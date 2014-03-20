@@ -52,6 +52,7 @@ public:
 
         //Testing shaders
         shader.Load("test.vert", "test.frag");
+        //shader.enable(true);
     }
 
     void onKeyPress(SDL_Scancode key)

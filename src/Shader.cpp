@@ -71,6 +71,15 @@ void Shader::Load(std::string vertex_shader, std::string fragment_shader)
     glAttachShader(program, vs);
     glAttachShader(program, fs);
     glLinkProgram(program);
+}
+
+void Shader::enable(bool enabled)
+{
+    if(!enabled)
+    {
+        glUseProgram(0);
+        return;
+    }
     glUseProgram(program);
 }
 
