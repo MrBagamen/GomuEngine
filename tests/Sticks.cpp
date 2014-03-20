@@ -5,6 +5,7 @@
 #include <gomu/Sound.hpp>
 #include <gomu/Music.hpp>
 #include <gomu/Shader.hpp>
+#include <gomu/Timer.hpp>
 #include <iostream>
 
 struct Entity {
@@ -118,6 +119,15 @@ public:
             scoreText.setString("Score: " + std::to_string(score));
             sound1.play();
         }
+
+        //Count FPS
+        if(fpsTimer.getTicks() >= 1000)
+        {
+            std::cout << "FPS: " << FPS << std::endl;
+            FPS = 0;
+            fpsTimer.start(); //Restart timer
+        }
+        FPS++;
     }
 
     void onDraw()
@@ -142,6 +152,8 @@ public:
     gomu::Sound sound1;
     gomu::Music music;
     gomu::Shader shader;
+    gomu::Timer fpsTimer;
+    int FPS = 0;
 };
 
 int main()
