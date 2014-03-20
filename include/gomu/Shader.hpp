@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <gomu/gomu.hpp>
 
 namespace gomu
 {

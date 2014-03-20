@@ -24,10 +24,12 @@ void Shader::Load(std::string vertex_shader, std::string fragment_shader)
     if(!inv.is_open())
     {
         std::cout << "Failed to load " << vertex_shader << std::endl;
+        return;
     }
     if(!inf.is_open())
     {
         std::cout << "Failed to load " << fragment_shader << std::endl;
+        return;
     }
 
     char buffer[500];

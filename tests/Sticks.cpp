@@ -4,12 +4,14 @@
 #include <gomu/Text.hpp>
 #include <gomu/Sound.hpp>
 #include <gomu/Music.hpp>
+#include <gomu/Shader.hpp>
 #include <iostream>
 
 struct Entity {
     gomu::Sprite sprite;
     double x = 64 , y = 128;
     int speed = 200;
+
     void draw()
     {
         sprite.setPosition(x, y);
@@ -47,6 +49,9 @@ public:
         music.loadFromFile("res/aa_arofl.xm");
         music.play();
         srand(time(NULL));
+
+        //Testing shaders
+        shader.Load("test.vert", "test.frag");
     }
 
     void onKeyPress(SDL_Scancode key)
@@ -131,6 +136,7 @@ public:
     gomu::Text scoreText, fsText, exText;
     gomu::Sound sound1;
     gomu::Music music;
+    gomu::Shader shader;
 };
 
 int main()
