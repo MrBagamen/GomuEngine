@@ -1,5 +1,8 @@
 #include "gomu/Shader.hpp"
+
 #include <vector>
+#include <iostream>
+#include <fstream>
 
 namespace gomu
 {
