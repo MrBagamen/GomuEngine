@@ -86,6 +86,23 @@ public:
         {
             ball.y += (ball.speed * dt);
         }
+        //Wrap when out of bounds
+        if (ball.x >= 640)
+        {
+            ball.x = -32;
+        }
+        else if(ball.x+32 <= 0)
+        {
+            ball.x = 640;
+        }
+        else if(ball.y >= 480)
+        {
+            ball.y = -32;
+        }
+        else if(ball.y+32 <= 0)
+        {
+            ball.y = 480;
+        }
 
         if (collision(ball, stick))
         {
