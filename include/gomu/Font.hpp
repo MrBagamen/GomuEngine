@@ -11,8 +11,7 @@ struct Font
 public:
     Font();
     ~Font();
-    void openFromFile(const std::string& filename, int ptsize);
-    TTF_Font* handle;
+    void openFromFile(const std::string &filename, int ptsize);
+    TTF_Font *handle;
 };
-
 }

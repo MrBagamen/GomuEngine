@@ -23,7 +23,7 @@ Shader::~Shader()
 
 void Shader::Load(std::string vertex_shader, std::string fragment_shader)
 {
-    //Load files
+    // Load files
     std::ifstream inv(vertex_shader);
     std::ifstream inf(fragment_shader);
 
@@ -37,13 +37,13 @@ void Shader::Load(std::string vertex_shader, std::string fragment_shader)
     }
 
     char buffer[500];
-    while(!inv.eof())
+    while (!inv.eof())
     {
         inv.getline(buffer, 500);
         vertexShader += buffer;
         vertexShader += "\n";
     }
-    while(!inf.eof())
+    while (!inf.eof())
     {
         inf.getline(buffer, 500);
         fragmentShader += buffer;
@@ -52,9 +52,9 @@ void Shader::Load(std::string vertex_shader, std::string fragment_shader)
     inv.close();
     inf.close();
 
-    //Load shaders
-    const char* vSauce = vertexShader.c_str();
-    const char* fSauce = fragmentShader.c_str();
+    // Load shaders
+    const char *vSauce = vertexShader.c_str();
+    const char *fSauce = fragmentShader.c_str();
 
     vs = glCreateShader(GL_VERTEX_SHADER);
     fs = glCreateShader(GL_FRAGMENT_SHADER);
@@ -82,12 +82,11 @@ void Shader::Load(std::string vertex_shader, std::string fragment_shader)
 
 void Shader::enable(bool enabled)
 {
-    if(!enabled)
+    if (!enabled)
     {
         glUseProgram(0);
         return;
     }
     glUseProgram(program);
 }
-
 }

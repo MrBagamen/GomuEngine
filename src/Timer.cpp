@@ -4,7 +4,7 @@ namespace gomu
 {
 Timer::Timer()
 {
-    //initialize
+    // initialize
     startTicks = 0;
     pausedTicks = 0;
     paused = false;
@@ -28,7 +28,7 @@ void Timer::stop()
 
 void Timer::pause()
 {
-    if(started == true && paused == false)
+    if (started == true && paused == false)
     {
         paused = true;
         pausedTicks = (double)SDL_GetTicks() - startTicks;
@@ -37,7 +37,7 @@ void Timer::pause()
 
 void Timer::unpause()
 {
-    if(paused)
+    if (paused)
     {
         paused = false;
         startTicks = (double)SDL_GetTicks() - pausedTicks;
@@ -47,9 +47,9 @@ void Timer::unpause()
 
 double Timer::getTicks()
 {
-    if(started)
+    if (started)
     {
-        if(paused)
+        if (paused)
         {
             return pausedTicks;
         }
@@ -69,5 +69,4 @@ bool Timer::isPaused()
 {
     return paused;
 }
-
 }

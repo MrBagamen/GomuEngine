@@ -8,9 +8,10 @@
 #include <gomu/Timer.hpp>
 #include <iostream>
 
-struct Entity {
+struct Entity
+{
     gomu::Sprite sprite;
-    double x = 64 , y = 128;
+    double x = 64, y = 128;
     int speed = 200;
 
     void draw()
@@ -20,15 +21,15 @@ struct Entity {
     }
 };
 
-bool collision(const Entity& e1, const Entity& e2)
+bool collision(const Entity &e1, const Entity &e2)
 {
-    return e1.x + 32 > e2.x && e1.y + 32 > e2.y && e1.x < e2.x + 32 && e1.y < e2.y + 32;
+    return e1.x + 32 > e2.x && e1.y + 32 > e2.y && e1.x < e2.x + 32 &&
+           e1.y < e2.y + 32;
 }
 
 class Sticks : public gomu::State
 {
 public:
-
     Sticks()
     {
         gomu::setBackgroundColor(51, 178, 51);
@@ -54,7 +55,7 @@ public:
         music.play();
         srand(time(NULL));
 
-        //Testing shaders
+        // Testing shaders
         shader.Load("test.vert", "test.frag");
         shader.enable(true);
     }
@@ -96,20 +97,20 @@ public:
         {
             ball.y += (ball.speed * dt);
         }
-        //Wrap when out of bounds
+        // Wrap when out of bounds
         if (ball.x >= 640)
         {
             ball.x = -32;
         }
-        else if(ball.x+32 <= 0)
+        else if (ball.x + 32 <= 0)
         {
             ball.x = 640;
         }
-        else if(ball.y >= 480)
+        else if (ball.y >= 480)
         {
             ball.y = -32;
         }
-        else if(ball.y+32 <= 0)
+        else if (ball.y + 32 <= 0)
         {
             ball.y = 480;
         }
@@ -123,21 +124,21 @@ public:
             sound1.play();
         }
 
-        //Count FPS
-        if(fpsTimer.getTicks() >= 1000)
+        // Count FPS
+        if (fpsTimer.getTicks() >= 1000)
         {
             fpsText.setString("FPS: " + std::to_string(FPS));
             FPS = 0;
-            fpsTimer.start(); //Restart timer
+            fpsTimer.start(); // Restart timer
         }
         FPS++;
     }
 
     void onDraw()
     {
-        //shader.enable(true);
+        // shader.enable(true);
         ball.draw();
-        //shader.enable(false);
+        // shader.enable(false);
 
         stick.draw();
         scoreText.draw();

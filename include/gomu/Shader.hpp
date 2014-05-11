@@ -14,6 +14,7 @@ public:
 
     void Load(std::string vertex_shader, std::string fragment_shader);
     void enable(bool enabled = false);
+
 private:
     std::string vertexShader, fragmentShader;
     GLuint vs, fs, program;

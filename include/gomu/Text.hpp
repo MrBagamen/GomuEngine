@@ -15,24 +15,24 @@ class Text
 public:
     Text();
     ~Text();
-    void setFont(const Font& font);
+    void setFont(const Font &font);
     void setColor(Uint8 _r, Uint8 _g, Uint8 _b);
     void setString(const std::string &m_string);
-	void setPosition(int _x, int _y);
+    void setPosition(int _x, int _y);
     void draw();
+
 private:
     void update();
-	int x, y;
+    int x, y;
 
     GLfloat quad[8];
     GLfloat texcoord[8];
 
-	GLuint texture;
-	SDL_Surface* img;
+    GLuint texture;
+    SDL_Surface *img;
     GLfloat text_color[12];
     SDL_Color default_color;
-    const Font* m_font;
+    const Font *m_font;
     std::string m_string;
 };
-
 }
