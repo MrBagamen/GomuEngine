@@ -13,16 +13,14 @@ public:
     }
 
 protected:
-    virtual void onUpdate(double dt)
+    virtual void onUpdate(double /*dt*/)
     {
-        (void)(dt);
     }
     virtual void onDraw()
     {
     }
-    virtual void onKeyPress(SDL_Scancode key)
+    virtual void onKeyPress(SDL_Scancode /*key*/)
     {
-        (void)(key);
     }
     friend int exec();
 };
