@@ -14,11 +14,11 @@ Shader::Shader()
 
 Shader::~Shader()
 {
-    glDetachShader(program, vs);
-    glDetachShader(program, fs);
-    glDeleteShader(vs);
-    glDeleteShader(fs);
-    glDeleteProgram(program);
+    glDetachShader(m_program, m_vs);
+    glDetachShader(m_program, m_fs);
+    glDeleteShader(m_vs);
+    glDeleteShader(m_fs);
+    glDeleteProgram(m_program);
 }
 
 void Shader::Load(std::string vertex_shader, std::string fragment_shader)
@@ -40,44 +40,44 @@ void Shader::Load(std::string vertex_shader, std::string fragment_shader)
     while (!inv.eof())
     {
         inv.getline(buffer, 500);
-        vertexShader += buffer;
-        vertexShader += "\n";
+        m_vertexShader += buffer;
+        m_vertexShader += "\n";
     }
     while (!inf.eof())
     {
         inf.getline(buffer, 500);
-        fragmentShader += buffer;
-        fragmentShader += "\n";
+        m_fragmentShader += buffer;
+        m_fragmentShader += "\n";
     }
     inv.close();
     inf.close();
 
     // Load shaders
-    const char *vSauce = vertexShader.c_str();
-    const char *fSauce = fragmentShader.c_str();
+    const char *vSauce = m_vertexShader.c_str();
+    const char *fSauce = m_fragmentShader.c_str();
 
-    vs = glCreateShader(GL_VERTEX_SHADER);
-    fs = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(vs, 1, &vSauce, nullptr);
-    glShaderSource(fs, 1, &fSauce, nullptr);
+    m_vs = glCreateShader(GL_VERTEX_SHADER);
+    m_fs = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(m_vs, 1, &vSauce, nullptr);
+    glShaderSource(m_fs, 1, &fSauce, nullptr);
 
-    glCompileShader(vs);
-    glCompileShader(fs);
+    glCompileShader(m_vs);
+    glCompileShader(m_fs);
 
     GLint len;
-    glGetShaderiv(vs, GL_INFO_LOG_LENGTH, &len);
+    glGetShaderiv(m_vs, GL_INFO_LOG_LENGTH, &len);
     std::vector<char> errV(len);
-    glGetShaderInfoLog(vs, errV.size(), nullptr, errV.data());
-    glGetShaderiv(fs, GL_INFO_LOG_LENGTH, &len);
+    glGetShaderInfoLog(m_vs, errV.size(), nullptr, errV.data());
+    glGetShaderiv(m_fs, GL_INFO_LOG_LENGTH, &len);
     std::vector<char> errF(len);
-    glGetShaderInfoLog(fs, errF.size(), nullptr, errF.data());
+    glGetShaderInfoLog(m_fs, errF.size(), nullptr, errF.data());
     std::cout << "Compile status: \n" << errV.data() << std::endl;
     std::cout << "Compile status: \n" << errF.data() << std::endl;
 
-    program = glCreateProgram();
-    glAttachShader(program, vs);
-    glAttachShader(program, fs);
-    glLinkProgram(program);
+    m_program = glCreateProgram();
+    glAttachShader(m_program, m_vs);
+    glAttachShader(m_program, m_fs);
+    glLinkProgram(m_program);
 }
 
 void Shader::enable(bool enabled)
@@ -87,6 +87,6 @@ void Shader::enable(bool enabled)
         glUseProgram(0);
         return;
     }
-    glUseProgram(program);
+    glUseProgram(m_program);
 }
 }

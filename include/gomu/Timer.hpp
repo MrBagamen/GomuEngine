@@ -20,10 +20,10 @@ public:
     bool isPaused();
 
 private:
-    double startTicks;
-    double pausedTicks;
+    double m_startTicks;
+    double m_pausedTicks;
 
-    bool paused;
-    bool started;
+    bool m_paused;
+    bool m_started;
 };
 }
