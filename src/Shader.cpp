@@ -45,26 +45,27 @@ void Shader::Load(std::string vertex_shader, std::string fragment_shader)
     auto vertexCode = readAll(vertex_shader);
     auto fragmentCode = readAll(fragment_shader);
 
-    const char *vSauce = vertexCode.data();
-    const char *fSauce = fragmentCode.data();
-
     m_vs = glCreateShader(GL_VERTEX_SHADER);
     m_fs = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(m_vs, 1, &vSauce, nullptr);
-    glShaderSource(m_fs, 1, &fSauce, nullptr);
 
-    glCompileShader(m_vs);
-    glCompileShader(m_fs);
+    auto compile = [](GLuint shader, const char *source)
+    {
+        glShaderSource(shader, 1, &source, nullptr);
+        glCompileShader(shader);
+        GLint status;
+        glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
+        if (!status)
+        {
+            GLint len;
+            glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &len);
+            std::vector<char> err(len + 1);
+            glGetShaderInfoLog(shader, len, nullptr, err.data());
+            error(err.data());
+        }
+    };
 
-    GLint len;
-    glGetShaderiv(m_vs, GL_INFO_LOG_LENGTH, &len);
-    std::vector<char> errV(len);
-    glGetShaderInfoLog(m_vs, errV.size(), nullptr, errV.data());
-    glGetShaderiv(m_fs, GL_INFO_LOG_LENGTH, &len);
-    std::vector<char> errF(len);
-    glGetShaderInfoLog(m_fs, errF.size(), nullptr, errF.data());
-    std::cout << "Compile status: \n" << errV.data() << std::endl;
-    std::cout << "Compile status: \n" << errF.data() << std::endl;
+    compile(m_vs, vertexCode.data());
+    compile(m_fs, fragmentCode.data());
 
     m_program = glCreateProgram();
     glAttachShader(m_program, m_vs);
