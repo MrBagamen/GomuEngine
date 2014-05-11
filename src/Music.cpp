@@ -14,7 +14,7 @@ void Music::loadFromFile(const std::string &filename)
 
 void Music::play()
 {
-    Mix_PlayMusic(m_music,(m_looping ? -1 : 0));
+    Mix_PlayMusic(m_music, (m_looping ? -1 : 0));
 }
 
 void Music::setLooping(bool looping)
@@ -30,5 +30,4 @@ Music::~Music()
         Mix_FreeMusic(m_music);
     }
 }
-
 }

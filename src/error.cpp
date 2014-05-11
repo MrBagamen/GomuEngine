@@ -19,5 +19,4 @@ void error(const char *fmt, ...)
     va_end(args);
     throw std::runtime_error(buf.data());
 }
-
 }

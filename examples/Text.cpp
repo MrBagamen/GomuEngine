@@ -4,7 +4,8 @@
 #include <gomu/State.hpp>
 #include <gomu/input.hpp>
 
-class Text : public gomu::State {
+class Text : public gomu::State
+{
 public:
     Text()
     {
@@ -43,4 +44,3 @@ int main()
     gomu::setState("text");
     return gomu::exec();
 }
-

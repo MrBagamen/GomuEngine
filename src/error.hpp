@@ -6,5 +6,4 @@ namespace gomu
 {
 
 void error(const char *fmt, ...);
-
 }

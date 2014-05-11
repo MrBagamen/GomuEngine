@@ -6,5 +6,4 @@ namespace gomu
 {
 
 bool isKeyDown(SDL_Scancode key);
-
 }

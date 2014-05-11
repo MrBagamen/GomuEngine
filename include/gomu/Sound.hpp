@@ -10,12 +10,11 @@ namespace gomu
 class Sound
 {
 public:
-    void loadFromFile(const std::string& filename);
+    void loadFromFile(const std::string &filename);
     void play();
     ~Sound();
 
 private:
     Mix_Chunk *m_chunk = nullptr;
 };
-
 }

@@ -14,11 +14,11 @@ namespace gomu
 int m_width;
 int m_height;
 std::string m_title;
-std::map<std::string, State*> m_states;
-State* m_state;
-const Uint8* m_keyState;
+std::map<std::string, State *> m_states;
+State *m_state;
+const Uint8 *m_keyState;
 bool m_fullscreen;
-SDL_Window* m_window;
+SDL_Window *m_window;
 SDL_GLContext m_glcontext;
 bool m_running;
 
@@ -48,7 +48,9 @@ void init(int width, int height, bool fullscreen, const std::string &title)
         videoflags |= SDL_WINDOW_FULLSCREEN;
     }
 
-    m_window = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, m_width, m_height, videoflags);
+    m_window = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED,
+                                SDL_WINDOWPOS_UNDEFINED, m_width, m_height,
+                                videoflags);
     m_glcontext = SDL_GL_CreateContext(m_window);
 
     if (!m_window)
@@ -78,7 +80,7 @@ void init(int width, int height, bool fullscreen, const std::string &title)
 
     Mix_OpenAudio(44100, AUDIO_S16SYS, 2, 1024);
 
-    if(TTF_Init())
+    if (TTF_Init())
     {
         error("Error initializing SDL_ttf: %s\n", TTF_GetError());
     }
@@ -92,7 +94,7 @@ void init(int width, int height, bool fullscreen, const std::string &title)
 
 void cleanUp()
 {
-    for (auto& pair : m_states)
+    for (auto &pair : m_states)
     {
         delete pair.second;
     }
@@ -145,7 +147,7 @@ int exec()
         }
 
         m_state->onUpdate(deltaTime.getTicks() / 1000.0f);
-        deltaTime.start(); //restart timer
+        deltaTime.start(); // restart timer
 
         glClear(GL_COLOR_BUFFER_BIT);
         m_state->onDraw();
@@ -160,7 +162,8 @@ bool toggleFullscreen()
 {
     m_fullscreen = !m_fullscreen;
 
-    SDL_SetWindowFullscreen(m_window, (m_fullscreen ? SDL_WINDOW_FULLSCREEN : 0));
+    SDL_SetWindowFullscreen(m_window,
+                            (m_fullscreen ? SDL_WINDOW_FULLSCREEN : 0));
 
     return m_fullscreen;
 }
@@ -174,5 +177,4 @@ void setBackgroundColor(int r, int g, int b)
 {
     glClearColor(r / 255.0f, g / 255.0f, b / 255.0f, 1.0f);
 }
-
 }

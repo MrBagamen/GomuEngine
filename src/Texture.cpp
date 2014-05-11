@@ -6,11 +6,11 @@
 namespace gomu
 {
 
-void Texture::loadFromFile(const std::string& filename)
+void Texture::loadFromFile(const std::string &filename)
 {
     SDL_Surface *img = IMG_Load(filename.c_str());
 
-    if(!img)
+    if (!img)
     {
         error("Error: %s\n", IMG_GetError());
     }
@@ -18,14 +18,15 @@ void Texture::loadFromFile(const std::string& filename)
     m_width = img->w;
     m_height = img->h;
 
-    //Build Texture
+    // Build Texture
     glGenTextures(1, &m_handle);
     glBindTexture(GL_TEXTURE_2D, m_handle);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     // TODO: We assume that the pixel data is always in RGBA format.
     // It might not always be the case.
     // We could examine the SDL_Surface for the format of the pixel data.
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, img->pixels);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_width, m_height, 0, GL_RGBA,
+                 GL_UNSIGNED_BYTE, img->pixels);
     SDL_FreeSurface(img);
 }
 
@@ -48,5 +49,4 @@ Texture::~Texture()
 {
     glDeleteTextures(1, &m_handle);
 }
-
 }
