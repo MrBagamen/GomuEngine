@@ -33,13 +33,13 @@ ${OPENGL_LIBRARY}
 )
 
 # Add Tests
-function(addTest name)
-    add_executable(${name} tests/${name}.cpp)
+function(addExample name)
+    add_executable(${name} examples/${name}.cpp)
     target_link_libraries(${name} GomuEngine)
 endfunction()
 
-addTest(Text)
-addTest(Sticks)
+addExample(Text)
+addExample(Sticks)
 
 # Installation
 install(FILES ${HEADERS} DESTINATION include/gomu)
