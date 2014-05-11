@@ -16,7 +16,6 @@ public:
     void enable(bool enabled = false);
 
 private:
-    std::string m_vertexShader, m_fragmentShader;
     GLuint m_vs, m_fs, m_program;
 };
 }

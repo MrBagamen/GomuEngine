@@ -21,40 +21,32 @@ Shader::~Shader()
     glDeleteProgram(m_program);
 }
 
+namespace
+{
+std::vector<char> readAll(const std::string filename)
+{
+    std::ifstream file(filename);
+    if (!file)
+    {
+        error("Could not open \"%s\" for reading.", filename.c_str());
+    }
+    file.seekg(0, std::ios_base::end);
+    std::size_t size = file.tellg();
+    file.seekg(0, std::ios_base::beg);
+    std::vector<char> data(size + 1);
+    file.read(data.data(), size);
+    return data;
+}
+}
+
 void Shader::Load(std::string vertex_shader, std::string fragment_shader)
 {
-    // Load files
-    std::ifstream inv(vertex_shader);
-    std::ifstream inf(fragment_shader);
-
-    if (!inv)
-    {
-        error("Failed to load \"%s\"", vertex_shader.c_str());
-    }
-    if (!inf)
-    {
-        error("Failed to load \"%s\"", fragment_shader.c_str());
-    }
-
-    char buffer[500];
-    while (!inv.eof())
-    {
-        inv.getline(buffer, 500);
-        m_vertexShader += buffer;
-        m_vertexShader += "\n";
-    }
-    while (!inf.eof())
-    {
-        inf.getline(buffer, 500);
-        m_fragmentShader += buffer;
-        m_fragmentShader += "\n";
-    }
-    inv.close();
-    inf.close();
-
     // Load shaders
-    const char *vSauce = m_vertexShader.c_str();
-    const char *fSauce = m_fragmentShader.c_str();
+    auto vertexCode = readAll(vertex_shader);
+    auto fragmentCode = readAll(fragment_shader);
+
+    const char *vSauce = vertexCode.data();
+    const char *fSauce = fragmentCode.data();
 
     m_vs = glCreateShader(GL_VERTEX_SHADER);
     m_fs = glCreateShader(GL_FRAGMENT_SHADER);
