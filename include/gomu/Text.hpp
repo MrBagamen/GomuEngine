@@ -16,22 +16,21 @@ public:
     Text();
     ~Text();
     void setFont(const Font &font);
-    void setColor(Uint8 _r, Uint8 _g, Uint8 _b);
-    void setString(const std::string &m_string);
-    void setPosition(int _x, int _y);
+    void setColor(Uint8 r, Uint8 g, Uint8 b);
+    void setString(const std::string &str);
+    void setPosition(int x, int y);
     void draw();
 
 private:
     void update();
-    int x, y;
+    int m_x, m_y;
 
-    GLfloat quad[8];
-    GLfloat texcoord[8];
+    GLfloat m_quad[8];
+    GLfloat m_texcoord[8];
 
-    GLuint texture;
-    SDL_Surface *img;
-    GLfloat text_color[12];
-    SDL_Color default_color;
+    GLuint m_texture;
+    SDL_Surface *m_surface;
+    GLfloat m_colors[12];
     const Font *m_font;
     std::string m_string;
 };

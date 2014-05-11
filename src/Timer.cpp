@@ -5,57 +5,57 @@ namespace gomu
 Timer::Timer()
 {
     // initialize
-    startTicks = 0;
-    pausedTicks = 0;
-    paused = false;
-    started = false;
+    m_startTicks = 0;
+    m_pausedTicks = 0;
+    m_paused = false;
+    m_started = false;
 
     start();
 }
 
 void Timer::start()
 {
-    started = true;
-    paused = false;
-    startTicks = (double)SDL_GetTicks();
+    m_started = true;
+    m_paused = false;
+    m_startTicks = (double)SDL_GetTicks();
 }
 
 void Timer::stop()
 {
-    started = false;
-    paused = false;
+    m_started = false;
+    m_paused = false;
 }
 
 void Timer::pause()
 {
-    if (started == true && paused == false)
+    if (m_started == true && m_paused == false)
     {
-        paused = true;
-        pausedTicks = (double)SDL_GetTicks() - startTicks;
+        m_paused = true;
+        m_pausedTicks = (double)SDL_GetTicks() - m_startTicks;
     }
 }
 
 void Timer::unpause()
 {
-    if (paused)
+    if (m_paused)
     {
-        paused = false;
-        startTicks = (double)SDL_GetTicks() - pausedTicks;
-        pausedTicks = 0;
+        m_paused = false;
+        m_startTicks = (double)SDL_GetTicks() - m_pausedTicks;
+        m_pausedTicks = 0;
     }
 }
 
 double Timer::getTicks()
 {
-    if (started)
+    if (m_started)
     {
-        if (paused)
+        if (m_paused)
         {
-            return pausedTicks;
+            return m_pausedTicks;
         }
         else
         {
-            return (double)SDL_GetTicks() - startTicks;
+            return (double)SDL_GetTicks() - m_startTicks;
         }
     }
     return 0;
@@ -63,10 +63,10 @@ double Timer::getTicks()
 
 bool Timer::isStarted()
 {
-    return started;
+    return m_started;
 }
 bool Timer::isPaused()
 {
-    return paused;
+    return m_paused;
 }
 }

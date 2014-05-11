@@ -12,6 +12,6 @@ public:
     Font();
     ~Font();
     void openFromFile(const std::string &filename, int ptsize);
-    TTF_Font *handle;
+    TTF_Font *m_handle;
 };
 }

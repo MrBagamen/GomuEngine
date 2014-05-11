@@ -4,17 +4,18 @@ namespace gomu
 {
 
 Text::Text()
-    : x(0), y(0), texcoord{ 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f },
-      texture(0), img(nullptr),
-      text_color{ 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
-                  1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f },
+    : m_x(0), m_y(0),
+      m_texcoord{ 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f },
+      m_texture(0), m_surface(nullptr),
+      m_colors{ 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f,
+                1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f },
       m_font(nullptr)
 {
 }
 
 Text::~Text()
 {
-    glDeleteTextures(1, &texture);
+    glDeleteTextures(1, &m_texture);
 }
 
 void Text::update()
@@ -23,24 +24,23 @@ void Text::update()
     {
         return;
     }
-    default_color = { 255, 255, 255, 0 };
-    img =
-        TTF_RenderText_Blended(m_font->handle, m_string.c_str(), default_color);
-    glDeleteTextures(1, &texture);
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
+    m_surface = TTF_RenderText_Blended(m_font->m_handle, m_string.c_str(),
+                                       { 255, 255, 255, 0 });
+    glDeleteTextures(1, &m_texture);
+    glGenTextures(1, &m_texture);
+    glBindTexture(GL_TEXTURE_2D, m_texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img->w, img->h, 0, GL_BGRA,
-                 GL_UNSIGNED_BYTE, img->pixels);
-    quad[0] = 0.0f;
-    quad[1] = 0.0f;
-    quad[2] = img->w;
-    quad[3] = 0.0f;
-    quad[4] = img->w;
-    quad[5] = img->h;
-    quad[6] = 0.0f;
-    quad[7] = img->h;
-    SDL_FreeSurface(img);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, m_surface->w, m_surface->h, 0,
+                 GL_BGRA, GL_UNSIGNED_BYTE, m_surface->pixels);
+    m_quad[0] = 0.0f;
+    m_quad[1] = 0.0f;
+    m_quad[2] = m_surface->w;
+    m_quad[3] = 0.0f;
+    m_quad[4] = m_surface->w;
+    m_quad[5] = m_surface->h;
+    m_quad[6] = 0.0f;
+    m_quad[7] = m_surface->h;
+    SDL_FreeSurface(m_surface);
 }
 
 void Text::setFont(const Font &font)
@@ -48,37 +48,35 @@ void Text::setFont(const Font &font)
     m_font = &font;
 }
 
-void Text::setColor(Uint8 _r, Uint8 _g, Uint8 _b)
+void Text::setColor(Uint8 r, Uint8 g, Uint8 b)
 {
-    text_color[0] = text_color[3] = text_color[6] = text_color[9] = _r / 255.0f;
-    text_color[1] = text_color[4] = text_color[7] = text_color[10] =
-        _g / 255.0f;
-    text_color[2] = text_color[5] = text_color[8] = text_color[11] =
-        _b / 255.0f;
+    m_colors[0] = m_colors[3] = m_colors[6] = m_colors[9] = r / 255.0f;
+    m_colors[1] = m_colors[4] = m_colors[7] = m_colors[10] = g / 255.0f;
+    m_colors[2] = m_colors[5] = m_colors[8] = m_colors[11] = b / 255.0f;
     update();
 }
 
-void Text::setString(const std::string &string)
+void Text::setString(const std::string &str)
 {
-    m_string = string;
+    m_string = str;
     update();
 }
 
 void Text::draw()
 {
     glPushMatrix();
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTranslatef(x, y, 0.0f);
-    glVertexPointer(2, GL_FLOAT, 0, quad);
-    glColorPointer(3, GL_FLOAT, 0, text_color);
-    glTexCoordPointer(2, GL_FLOAT, 0, texcoord);
+    glBindTexture(GL_TEXTURE_2D, m_texture);
+    glTranslatef(m_x, m_y, 0.0f);
+    glVertexPointer(2, GL_FLOAT, 0, m_quad);
+    glColorPointer(3, GL_FLOAT, 0, m_colors);
+    glTexCoordPointer(2, GL_FLOAT, 0, m_texcoord);
     glDrawArrays(GL_QUADS, 0, 4);
     glPopMatrix();
 }
 
-void Text::setPosition(int _x, int _y)
+void Text::setPosition(int x, int y)
 {
-    x = _x;
-    y = _y;
+    m_x = x;
+    m_y = y;
 }
 }

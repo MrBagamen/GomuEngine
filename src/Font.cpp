@@ -5,19 +5,19 @@
 namespace gomu
 {
 
-Font::Font() : handle(nullptr)
+Font::Font() : m_handle(nullptr)
 {
 }
 
 Font::~Font()
 {
-    TTF_CloseFont(handle);
+    TTF_CloseFont(m_handle);
 }
 
 void Font::openFromFile(const std::string &filename, int ptsize)
 {
-    handle = TTF_OpenFont(filename.c_str(), ptsize);
-    if (!handle)
+    m_handle = TTF_OpenFont(filename.c_str(), ptsize);
+    if (!m_handle)
     {
         error("Failed to open \"%s\". Reason: %s", filename.c_str(),
               TTF_GetError());
