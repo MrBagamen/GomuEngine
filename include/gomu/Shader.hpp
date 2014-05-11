@@ -1,5 +1,4 @@
-#ifndef SHADER_HPP
-#define SHADER_HPP
+#pragma once
 
 #include <GL/glew.h>
 #include <string>
@@ -20,5 +19,3 @@ private:
     GLuint vs, fs, program;
 };
 }
-
-#endif // SHADER_HPP
